@@ -2,7 +2,9 @@
 *.env
 *.dev
 .DS_Store
-
+.idea
+typings
+public/app/js/*
 # Docker
 Dockerfile
 docker-compose.yml

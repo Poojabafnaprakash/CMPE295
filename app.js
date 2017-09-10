@@ -36,8 +36,8 @@ app.get('/users', user.list);
 app.get('/distance', directionsAPI.distance);
 app.get('/time', directionsAPI.totalTime);
 app.get('/latlng', directionsAPI.latLng);
+app.get('/cronJob', directionsAPI.cronJob);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-
