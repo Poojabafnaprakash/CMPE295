@@ -1,6 +1,10 @@
 var googleMapsClient = require('@google/maps').createClient({
-	key : 'AIzaSyC604DlvcnjRnXKHeftAZLf2qQHd4M2DmU'
+	key : 'AIzaSyDwoug5gmlX3edUXItz1b8MJMcveKFEu1A',
+	Promise: Promise
 });
+
+var fs = require('fs');
+var Combinatorics = require('js-combinatorics');
 
 exports.distance = function(req, res) {
 	googleMapsClient.directions({
@@ -57,25 +61,55 @@ exports.directions = function(req, res) {
 	});
 };
 
-//to store in MongoDB - Source | Destination | Date | Time | TravelTime | startLatlong | End Lat/long
+// to store in MongoDB - Source | Destination | Date | Time | TravelTime |
+// startLatlong | End Lat/long
 exports.cronJob = function(req, res) {
-	googleMapsClient.directions({
-		origin : req.param("source"),
-		destination : req.param("destination"),
-		mode : req.param("mode")
-	}, function(err, response) {
-		if (!err) {
+	var arr = fs.readFileSync(
+			'./streets.txt').toString().split(
+			"\n");
+	var listOfObjects = [];
+	var responseObj = [];
+	for(var i = 0; i < 3; i++) {
+		for(var j = 0; j < 3; j++) {
+			if(arr[i] === arr[j]) continue;
+			var obj = {};
+	    	obj['src'] = arr[i];
+			obj['dst'] = arr[j];
+			listOfObjects.push(obj);
+		}		
+	}
+	var promises = [];
+	for(var i = 0; i < 3; i++) {
+		var cronJobObj = {};
+		console.log(listOfObjects);
+		promises.push(
+		googleMapsClient.directions({
+			origin : listOfObjects[i].src + ', San Jose, CA',
+			destination : listOfObjects[i].dst + ', San Jose, CA',
+			mode : 'driving'
+		}).asPromise()
+		  .then((response) => {
 			var today = new Date();
-			var cronJobObj = {
-					"Source": req.param("source"),
-					"Destination": req.param("destination"),
-					"Date": today.getMonth() + "/" + today.getDate() + "/" + today.getFullYear(),
-					"Time": today.getHours(),
-					"TravelTime": response.json.routes[0].legs[0].duration,
-					"StartLatLng": response.json.routes[0].legs[0].start_location,
-					"EndLatLng": response.json.routes[0].legs[0].end_location
-			};
-			res.send(cronJobObj);
-		}
-	});
+				
+			cronJobObj['Source'] = listOfObjects[i].src + ', San Jose, CA';
+			cronJobObj['Destination'] = listOfObjects[i].dst + ', San Jose, CA';
+			cronJobObj['Date'] = today.getMonth() + "/"
+							+ today.getDate() + "/"
+							+ today.getFullYear();
+			cronJobObj['Time'] = today.getHours();
+			cronJobObj['TravelTime'] = response.json.routes[0].legs[0].duration;
+			cronJobObj['StartLatLng'] = response.json.routes[0].legs[0].start_location;
+			cronJobObj['EndLatLng'] = response.json.routes[0].legs[0].end_location;
+			responseObj.push(cronJobObj);
+		  })
+		  .catch((err) => {
+		    console.log(err);
+		  }));		
+	}
+	
+	Promise.all(promises).then(function() {
+		res.send(responseObj); 
+	}, function(err) {
+		console.log(err);
+	});	
 }
