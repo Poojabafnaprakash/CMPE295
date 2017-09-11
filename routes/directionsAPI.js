@@ -69,8 +69,8 @@ exports.cronJob = function(req, res) {
 			"\n");
 	var listOfObjects = [];
 	var responseObj = [];
-	for(var i = 0; i < arr.length; i++) {
-		for(var j = 0; j < arr.length; j++) {
+	for(var i = 0; i < 3; i++) {
+		for(var j = 0; j < 3; j++) {
 			if(arr[i] === arr[j]) continue;
 			var obj = {};
 	    	obj['src'] = arr[i];
@@ -108,6 +108,13 @@ exports.cronJob = function(req, res) {
 	});
 	
 	Promise.all(promises).then(function() {
+		fs.writeFile("./output.txt", JSON.stringify(responseObj), function(err) {
+		    if(err) {
+		        return console.log(err);
+		    }
+
+		    console.log("The file was saved!");
+		}); 
 		res.send(responseObj); 
 	}, function(err) {
 		console.log(err);
