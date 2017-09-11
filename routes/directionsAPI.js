@@ -69,8 +69,8 @@ exports.cronJob = function(req, res) {
 			"\n");
 	var listOfObjects = [];
 	var responseObj = [];
-	for(var i = 0; i < 3; i++) {
-		for(var j = 0; j < 3; j++) {
+	for(var i = 0; i < arr.length; i++) {
+		for(var j = 0; j < arr.length; j++) {
 			if(arr[i] === arr[j]) continue;
 			var obj = {};
 	    	obj['src'] = arr[i];
@@ -79,20 +79,20 @@ exports.cronJob = function(req, res) {
 		}		
 	}
 	var promises = [];
-	for(var i = 0; i < 3; i++) {
+	listOfObjects.forEach(function (arrayItem) {	   
 		var cronJobObj = {};
-		console.log(listOfObjects);
+		console.log(arrayItem);
 		promises.push(
 		googleMapsClient.directions({
-			origin : listOfObjects[i].src + ', San Jose, CA',
-			destination : listOfObjects[i].dst + ', San Jose, CA',
+			origin : arrayItem.src + ', San Jose, CA',
+			destination : arrayItem.dst + ', San Jose, CA',
 			mode : 'driving'
 		}).asPromise()
 		  .then((response) => {
 			var today = new Date();
 				
-			cronJobObj['Source'] = listOfObjects[i].src + ', San Jose, CA';
-			cronJobObj['Destination'] = listOfObjects[i].dst + ', San Jose, CA';
+			cronJobObj['Source'] = arrayItem.src + ', San Jose, CA';
+			cronJobObj['Destination'] = arrayItem.dst + ', San Jose, CA';
 			cronJobObj['Date'] = today.getMonth() + "/"
 							+ today.getDate() + "/"
 							+ today.getFullYear();
@@ -105,7 +105,7 @@ exports.cronJob = function(req, res) {
 		  .catch((err) => {
 		    console.log(err);
 		  }));		
-	}
+	});
 	
 	Promise.all(promises).then(function() {
 		res.send(responseObj); 
