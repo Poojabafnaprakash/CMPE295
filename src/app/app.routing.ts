@@ -11,19 +11,42 @@ import { NotificationsComponent } from '../notifications/notifications.component
 import { LandingPageComponent } from '../landing-page/landing-page.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 
-
-
 const routes: Routes =[
-    { path: 'home',      component: HomeComponent },
-    { path: 'user',           component: UserComponent },
-    { path: 'table',          component: TablesComponent },
-    { path: 'maps',           component: MapsComponent },
-    { path: 'notifications',  component: NotificationsComponent },
-    { path: 'dashboard',  component: DashboardComponent },
-    //{ path: 'hi',  component: LandingPageComponent },
-    //{ path: 'home',  component: LandingPageComponent },
-    //{ path: '',          redirectTo: 'hi', pathMatch: 'full' }
-    { path: '',          component: LandingPageComponent, pathMatch: 'full' }
+  {
+  path: '',
+    component: LandingPageComponent,
+    children: [
+      {
+        path: '',
+        component: LandingPageComponent
+      }
+    ]
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    children: [
+      {
+        path: 'home',
+        component: HomeComponent
+      },
+      { path: 'user',
+        component: UserComponent
+      },
+      { path: 'table',
+        component: TablesComponent
+      },
+      { path: 'maps',
+        component: MapsComponent
+      },
+      { path: 'notifications',
+        component: NotificationsComponent },
+    ]
+  },
+  {
+    path: '**',
+    redirectTo: ''
+  }
 ];
 
 @NgModule({

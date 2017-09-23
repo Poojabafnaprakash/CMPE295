@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,7 +8,6 @@ import { Router } from '@angular/router';
 })
 export class LandingPageComponent implements OnInit {
 
-  //constructor(public location: Location) { }
   constructor(private router: Router) {}
 
   ngOnInit() {
@@ -18,4 +16,5 @@ export class LandingPageComponent implements OnInit {
   login() {
     this.router.navigateByUrl('/dashboard');
   }
+  
 }
