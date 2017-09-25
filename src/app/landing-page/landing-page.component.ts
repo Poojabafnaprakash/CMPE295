@@ -14,7 +14,7 @@ export class LandingPageComponent implements OnInit {
   }
 
   login() {
-    this.router.navigateByUrl('/dashboard');
+    this.router.navigateByUrl('/main/dashboard');
   }
-  
+
 }

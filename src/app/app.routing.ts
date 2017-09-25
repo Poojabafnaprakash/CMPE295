@@ -3,13 +3,13 @@ import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from '../home/home.component';
-import { UserComponent } from '../user/user.component';
-import { TablesComponent } from '../tables/tables.component';
-import { MapsComponent } from '../maps/maps.component';
-import { NotificationsComponent } from '../notifications/notifications.component';
-import { LandingPageComponent } from '../landing-page/landing-page.component';
-import { DashboardComponent } from '../dashboard/dashboard.component';
+import { HomeComponent } from './home/home.component';
+import { UserComponent } from './user/user.component';
+import { MapsComponent } from './maps/maps.component';
+import { TablesComponent } from './tables/tables.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes =[
   {
@@ -23,24 +23,29 @@ const routes: Routes =[
     ]
   },
   {
-    path: 'dashboard',
+    path: 'main',
     component: DashboardComponent,
     children: [
       {
         path: 'home',
         component: HomeComponent
       },
-      { path: 'user',
-        component: UserComponent
-      },
-      { path: 'table',
-        component: TablesComponent
-      },
-      { path: 'maps',
+      {
+        path: 'dashboard',
         component: MapsComponent
       },
-      { path: 'notifications',
-        component: NotificationsComponent },
+      {
+        path: 'user',
+        component: UserComponent
+      },
+      {
+        path: 'table',
+        component: TablesComponent
+      },
+      {
+        path: 'notifications',
+        component: NotificationsComponent
+      }
     ]
   },
   {

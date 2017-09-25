@@ -5,20 +5,20 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app.routing';
-import { NavbarModule } from '../shared/navbar/navbar.module';
-import { FooterModule } from '../shared/footer/footer.module';
-import { SidebarModule } from '../sidebar/sidebar.module';
-import { LbdModule } from '../lbd/lbd.module';
+import { NavbarModule } from './shared/navbar/navbar.module';
+import { FooterModule } from './shared/footer/footer.module';
+import { SidebarModule } from './sidebar/sidebar.module';
+import { LbdModule } from './lbd/lbd.module';
 
 import { AppComponent } from './app.component';
 
-import { HomeComponent } from '../home/home.component';
-import { UserComponent } from '../user/user.component';
-import { TablesComponent } from '../tables/tables.component';
-import { MapsComponent } from '../maps/maps.component';
-import { NotificationsComponent } from '../notifications/notifications.component';
-import { LandingPageComponent } from '../landing-page/landing-page.component';
-import { DashboardComponent } from '../dashboard/dashboard.component';
+import { HomeComponent } from './home/home.component';
+import { UserComponent } from './user/user.component';
+import { TablesComponent } from './tables/tables.component';
+import { MapsComponent } from './maps/maps.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
