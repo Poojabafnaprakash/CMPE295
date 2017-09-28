@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgForm} from '@angular/forms';
+import { UserService } from './user.service';
+import { User } from './model/user';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-landing-page',
@@ -8,13 +13,20 @@ import { Router } from '@angular/router';
 })
 export class LandingPageComponent implements OnInit {
 
-  constructor(private router: Router) {}
+  user: User;
+  constructor(private router: Router, private userService: UserService) {
+    this.user = new User("", "");
+  }
 
   ngOnInit() {
   }
 
-  login() {
-    this.router.navigateByUrl('/main/dashboard');
+  login(userForm: NgForm) {
+    this.userService.login(this.user)
+    .subscribe(successCode => {
+      this.userService.setUserLoggedIn();
+      //this.router.navigateByUrl('/main/dashboard');
+      this.router.navigate(['main/dashboard']);
+    }, errorCode => console.log("error logging in."));
   }
-
 }

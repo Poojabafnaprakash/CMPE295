@@ -3,14 +3,14 @@
     <div id="map" class="col-sm-9">
     </div>
     <div class="col-sm-3">
-        <form class="margin-input">
+        <form class="margin-input" (ngSubmit)="onSubmit(userInputForm)" #userInputForm="ngForm">
           <div class="form-group">
             <h5>Enter source:</h5>
-            <input type="text" class="form-control" id="source" placeholder="Enter source">
+            <input type="text" class="form-control" id="source" placeholder="Enter source" [(ngModel)]="userInput.source" name="source">
           </div>
           <div class="form-group">
             <h5>Enter destination:</h5>
-            <input type="text" class="form-control" id="destination" placeholder="Enter destination">
+            <input type="text" class="form-control" id="destination" placeholder="Enter destination" [(ngModel)]="userInput.destination" name="destination">
           </div>
           <button type="submit" class="btn btn-info btn-fill">Submit</button>
         </form>

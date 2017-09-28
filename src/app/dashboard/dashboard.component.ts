@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
+import { UserService } from '../landing-page/user.service'
 
 declare const google: any;
 interface Marker {
@@ -17,23 +18,9 @@ draggable?: boolean;
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public location: Location) { }
+  constructor(public location: Location, private userService: UserService) { }
 
   ngOnInit() {
-    // const myLatlng = new google.maps.LatLng(37.279518, -121.867905);
-    //
-    // const mapOptions = {
-    //     zoom: 13,
-    //     center: myLatlng,
-    //     scrollwheel: false
-    // };
-    // const map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    // const Marker = new google.maps.Marker({
-    //     position: myLatlng,
-    //     title: 'Hello World!'
-    // });
-    // // To add the marker to the map, call setMap();
-    // Marker.setMap(map);
   }
 
   isMap(path){
