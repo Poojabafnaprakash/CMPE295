@@ -32,7 +32,7 @@ export class MapsComponent implements OnInit {
     const myLatlng = new google.maps.LatLng(37.279518, -121.867905);
 
     const mapOptions = {
-      zoom: 13,
+      zoom: 11,
       center: myLatlng,
       scrollwheel: false
     };
@@ -41,8 +41,13 @@ export class MapsComponent implements OnInit {
       position: myLatlng,
       title: 'Hello World!'
     });
+    const SJSUMarker = new google.maps.Marker({
+      position: new google.maps.LatLng(37.3351874,-121.8832602),
+      title: 'San Jose State University'
+    });
     // To add the marker to the map, call setMap();
     Marker.setMap(map);
+    SJSUMarker.setMap(map);
     this.userInput = new UserInput(1, "", "", "", "");
   }
 
