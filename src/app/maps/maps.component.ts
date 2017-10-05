@@ -24,7 +24,7 @@ export class MapsComponent implements OnInit {
   //https://loiane.com/2017/08/angular-hide-navbar-login-page/
   userInput: UserInput;
   statusCode: number;
-  results: PredictedResults;
+  predictionResult: PredictedResults;
 
   constructor(private userInputService: UserInputService) { }
 
@@ -75,8 +75,8 @@ export class MapsComponent implements OnInit {
     this.userInputService.create(this.userInput)
     .subscribe(successCode => {
       console.log(successCode);
-      this.results = successCode;
-      console.log(this.results);
+      this.predictionResult = successCode;
+      console.log(this.predictionResult);
     },
     errorCode => this.statusCode = errorCode);
   }
