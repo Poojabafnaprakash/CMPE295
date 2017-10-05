@@ -24,7 +24,7 @@ export class MapsComponent implements OnInit {
   //https://loiane.com/2017/08/angular-hide-navbar-login-page/
   userInput: UserInput;
   statusCode: number;
-  private results: PredictedResults;
+  results: PredictedResults;
 
   constructor(private userInputService: UserInputService) { }
 
@@ -43,25 +43,17 @@ export class MapsComponent implements OnInit {
     });
     // To add the marker to the map, call setMap();
     Marker.setMap(map);
-    this.userInput = new UserInput(1, "", "");
-  }
-
-  private save(): void {
-    this.userInputService.create(this.userInput);
+    this.userInput = new UserInput(1, "", "", "", "");
   }
 
   onSubmit(userInputForm: NgForm) {
-    // console.log(this.userInput);
-    // console.log(userInputForm);
     this.statusCode = null;
     this.userInputService.create(this.userInput)
     .subscribe(successCode => {
-      //this.statusCode = successCode;
-    //  console.log(this.statusCode);
+      console.log(successCode);
       this.results = successCode;
       console.log(this.results);
     },
     errorCode => this.statusCode = errorCode);
-    console.log(this.statusCode);
   }
 }

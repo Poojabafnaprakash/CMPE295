@@ -13,25 +13,15 @@ export class UserInputService {
 
   constructor(private http: Http) { }
 
-  create(userInput: UserInput):Observable<PredictedResults> {
+  create(userInput: UserInput):Observable<PredictedResults[]> {
     let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: cpHeaders });
-        //console.log(userInput);
         return this.http.post(this.userInputUrl, userInput, options)
-        .map(res => {
-        return res.json().map(item => {
-          return new PredictedResults(
-              item.streetName,
-              item.congestionRate
-          );
-        });
-      })
-      .catch(this.handleError);
-               //.map(success => success.status)
+          .map(success => success.json())
+          .catch(this.handleError);
     }
 
   private handleError (error: Response | any) {
-		//console.error(error.message || error);
 		return Observable.throw(error.status);
     }
 

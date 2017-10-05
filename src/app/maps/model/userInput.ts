@@ -4,8 +4,8 @@ export class UserInput {
     public id: number,
     public source: string,
     public destination: string,
-    public time?: number,
-    public day?: string
+    public time: string,
+    public day: string
   ) {  }
 
 }
