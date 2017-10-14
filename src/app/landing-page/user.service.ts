@@ -32,6 +32,15 @@ export class UserService {
         return this.http.post(this.userUrl, user, options)
                .map(success => success.status)
                .catch(this.handleError);
+  }
+
+  register(user: User):Observable<number> {
+      let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
+          let options = new RequestOptions({ headers: cpHeaders });
+          console.log(user);
+          return this.http.post('/api/register', user, options)
+                 .map(success => success.status)
+                 .catch(this.handleError);
     }
 
   private handleError (error: Response | any) {

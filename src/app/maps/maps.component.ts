@@ -38,35 +38,6 @@ export class MapsComponent implements OnInit {
     };
     const map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-    const AlamedaMarker = new google.maps.Marker({
-      position: new google.maps.LatLng(37.332507, -121.9124662),
-      title: 'Alameda'
-    });
-    const SJSUMarker = new google.maps.Marker({
-      position: new google.maps.LatLng(37.3351874,-121.8832602),
-      title: 'San Jose State University'
-    });
-    // To add the marker to the map, call setMap();
-    AlamedaMarker.setMap(map);
-    SJSUMarker.setMap(map);
-
-    //pollyline
-    var flightPlanCoordinates = [
-      {lat: 37.332507, lng: -121.9124662},
-      {lat: 37.3323574, lng: -121.9122916},
-      {lat: 37.3421393, lng: -121.8863851},
-      {lat: 37.337361, lng: -121.88282},
-      {lat: 37.3373706, lng: -121.882799}
-    ];
-    var flightPath = new google.maps.Polyline({
-      path: flightPlanCoordinates,
-      geodesic: true,
-      strokeColor: '#FF0000',
-      strokeOpacity: 1.0,
-      strokeWeight: 2
-    });
-
-    flightPath.setMap(map);
     this.userInput = new UserInput(1, "", "", "", "");
   }
 
@@ -76,6 +47,43 @@ export class MapsComponent implements OnInit {
     .subscribe(successCode => {
       console.log(successCode);
       this.predictionResult = successCode;
+      //pollyline
+      const myLatlng = new google.maps.LatLng(37.279518, -121.867905);
+
+      const mapOptions = {
+        zoom: 12,
+        center: myLatlng,
+        scrollwheel: false
+      };
+      const map = new google.maps.Map(document.getElementById('map'), mapOptions);
+      var flightPlanCoordinates = [
+        {lat: 37.332507, lng: -121.9124662},
+        {lat: 37.3323574, lng: -121.9122916},
+        {lat: 37.3421393, lng: -121.8863851},
+        {lat: 37.337361, lng: -121.88282},
+        {lat: 37.3373706, lng: -121.882799}
+      ];
+      var flightPath = new google.maps.Polyline({
+        path: flightPlanCoordinates,
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+      });
+
+      flightPath.setMap(map);
+
+      const AlamedaMarker = new google.maps.Marker({
+        position: new google.maps.LatLng(37.332507, -121.9124662),
+        title: 'Alameda'
+      });
+      const SJSUMarker = new google.maps.Marker({
+        position: new google.maps.LatLng(37.3351874,-121.8832602),
+        title: 'San Jose State University'
+      });
+      // To add the marker to the map, call setMap();
+      AlamedaMarker.setMap(map);
+      SJSUMarker.setMap(map);
       console.log(this.predictionResult);
     },
     errorCode => this.statusCode = errorCode);

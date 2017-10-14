@@ -6,7 +6,8 @@ export class User {
     public id?: number,
     public dob?: number,
     public firstName?: string,
-    public lastName?: string
+    public lastName?: string,
+    public phone?: number
   ) {  }
 
 }

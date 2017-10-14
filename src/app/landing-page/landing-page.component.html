@@ -1,20 +1,3 @@
-<!-- <div>
-  <form class="margin-input" (ngSubmit)="login(loginForm)" #loginForm="ngForm">
-    <div class="form-group">
-      <h5>Enter email:</h5>
-      <input type="email" class="form-control" id="email" placeholder="Enter email" [(ngModel)]="user.email" name="email">
-    </div>
-    <div class="form-group">
-      <h5>Enter Password:</h5>
-      <input type="password" class="form-control" id="password" placeholder="Enter password" [(ngModel)]="user.password" name="password">
-    </div>
-    <button type="submit" class="btn btn-info btn-fill">Login</button>
-  </form>
-</div> -->
-<!-- <button class="btn btn-primary" (click)="login()">Login</button> -->
-
-
-
 <div class="container-fluid bg-img">
   <div class="container login-page">
     <div class="panel panel-default">
@@ -47,35 +30,35 @@
           </form>
         </div>
         <div id="register" class="tab-pane fade">
-          <form class="form-horizontal" id="register-form-id">
+          <form class="form-horizontal" id="register-form-id" method="post" name="register" (ngSubmit)="register(registerForm)" #registerForm="ngForm">
             <div class="form-group">
               <h5 class="control-label col-xs-offset-1 col-xs-4 col-sm-3 col-md-3 ">First Name:</h5>
               <div class="col-md-7 col-lg-7 col-sm-5 col-xs-pull-1 col-md-pull-1 col-xs-6 col-xs-offset-1">
-                <input type="text" class="form-control" id="name" placeholder="First Name" required>
+                <input type="text" class="form-control" id="name" placeholder="First Name" id="firstName" [(ngModel)]="user.firstName" name="firstName" required>
               </div>
             </div>
             <div class="form-group">
               <h5 class="control-label col-xs-offset-1 col-xs-4 col-sm-3 col-md-3 ">Last Name:</h5>
               <div class="col-md-7 col-lg-7 col-sm-5 col-xs-pull-1 col-md-pull-1 col-xs-6 col-xs-offset-1">
-                <input type="text" class="form-control" id="name" placeholder="Last Name" required>
+                <input type="text" class="form-control" id="name" placeholder="Last Name" id="lastName" [(ngModel)]="user.lastName" name="lastName" required>
               </div>
             </div>
             <div class="form-group">
               <h5 class="control-label col-xs-offset-1 col-xs-4 col-sm-3 col-md-3 ">Email:</h5>
               <div class="col-md-7 col-lg-7 col-sm-5 col-xs-pull-1 col-md-pull-1 col-xs-6 col-xs-offset-1">
-                <input type="email" class="form-control" id="reg-email" placeholder="Email" required>
+                <input type="email" class="form-control" placeholder="Email" id="email" [(ngModel)]="user.email" name="email" required>
               </div>
             </div>
             <div class="form-group">
               <h5 class="control-label col-xs-offset-1 col-xs-4 col-sm-3 col-md-3 ">Phone Number:</h5>
               <div class="col-md-7 col-lg-7 col-sm-5 col-xs-pull-1 col-md-pull-1 col-xs-6 col-xs-offset-1">
-                <input type="tel" class="form-control" id="telephone"  maxlength="14" placeholder="Phone Number" required>
+                <input type="tel" class="form-control" id="phone" [(ngModel)]="user.phone" name="phone"  maxlength="14" placeholder="Phone Number" required>
               </div>
             </div>
             <div class="form-group">
               <h5 class="control-label col-xs-offset-1 col-xs-4 col-sm-3 col-md-3">Password:</h5>
               <div class="col-md-7 col-lg-7 col-sm-5 col-xs-pull-1 col-md-pull-1 col-xs-6 col-xs-offset-1">
-                <input type="password" class="form-control" id="reg-password" placeholder="Password" required>
+                <input type="password" class="form-control" id="password" [(ngModel)]="user.password" name="password" placeholder="Password" required>
               </div>
             </div>
             <div class="form-group">
@@ -87,7 +70,7 @@
             <div class="form-group">
               <h5 class="control-label col-xs-offset-1 col-xs-4 col-sm-3 col-md-3 "></h5>
               <div class="col-md-7 col-lg-7 col-sm-5 col-xs-pull-1 col-md-pull-1 col-xs-6 col-xs-offset-1">
-                <button type="submit" class="btn btn-info btn-fill">Sign Up</button>
+                <button type="submit" class="btn btn-info btn-fill">Register</button>
               </div>
             </div>
           </form>
