@@ -43,8 +43,8 @@ app.get('/users', user.list);
 app.get('/distance', directionsAPI.distance);
 app.get('/time', directionsAPI.totalTime);
 app.get('/latlng', directionsAPI.latLng);
-app.use('/cronJob', directionsAPI.cronJob);
 
+app.get('/api/cronJob', directionsAPI.cronJob);
 app.post('/api/userInput', directionsAPI.userInput);
 app.post('/api/checklogin', login.checkLogin);
 app.post('/api/register', login.register);

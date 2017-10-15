@@ -27,13 +27,13 @@ exports.checkLogin = function(req, res) {
 				var bytes  = CryptoJS.AES.decrypt(pwd.toString(), 'cmpe295');
 				var plaintext = bytes.toString(CryptoJS.enc.Utf8);
 				console.log(password);
-				console.log(plaintext);
+				console.log("plaintext: " + plaintext);
 				if(plaintext == password){
 					req.session.email = results[0].email;
 					req.session.name = results[0].firstname;
 					req.session.lastname = results[0].lastname;
 					req.session.id = results[0].user_id;
-					req.session.birthday = results[0].birthday;
+					req.session.phone = results[0].phone;
 					var lastlogdt = results[0].lastlogin;
 					if(lastlogdt!=null){
 						req.session.lastlogin = lastlogdt.substring(0,25);
@@ -67,28 +67,26 @@ exports.checkLogin = function(req, res) {
 };
 
 exports.register = function(req, res) {
-	// These two variables come from the form on
-	// the views/login.hbs page
 	var email = req.param("email");
 	var password = req.param("password");
-	var firstname = req.param("firstname");
-	var lastname = req.param("lastname");
-	var birthday = req.param("birthday");
+	var firstName = req.param("firstName");
+	var lastName = req.param("lastName");
+	var phone = req.param("phone");
 	var json_responses;
 	var dt = new Date();
 	var ciphertext = CryptoJS.AES.encrypt(password, 'cmpe295');
-	var insertUser = "insert into members(email,password,firstname,lastname,lastlogin,birthday) values('"
+	var insertUser = "insert into members(email,password,firstName,lastName,lastlogin,phone) values('"
 			+ email
 			+ "','"
 			+ ciphertext
 			+ "','"
-			+ firstname
+			+ firstName
 			+ "','"
-			+ lastname
+			+ lastName
 			+ "','"
 			+ dt.toString()
 			+ "','"
-			+ birthday
+			+ phone
 			+ "')";
 	console.log("before mysql: "+insertUser);
 	mysql.insertData(function(err, results) {
@@ -98,10 +96,10 @@ exports.register = function(req, res) {
 			throw err;
 		} else {
 			req.session.email = email;
-			req.session.name = firstname;
-			req.session.lastname = lastname;
+			req.session.name = firstName;
+			req.session.lastname = lastName;
 			req.session.id = results.insertId;
-			req.session.birthday = birthday;
+			req.session.phone = phone;
 			json_responses = {
 				"statusCode" : 200
 			};
@@ -138,7 +136,7 @@ exports.userprofile = function(req, res) {
 		log.info("The user "+req.session.id+"accessing /userprofile");
 		res.render("profilepage", {
 			email : req.session.email,
-			birthday : req.session.birthday,
+			phone : req.session.phone,
 			name : req.session.name,
 			lastname : req.session.lastname,
 			lastlogin : req.session.lastlogin

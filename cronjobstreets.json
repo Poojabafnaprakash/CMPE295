@@ -1,0 +1,122 @@
+[
+   {
+      "src": "Casa Verde Street",
+      "dst": "San Jose State Univerisity"
+   },
+   {
+      "src": "San Jose State Univerisity",
+      "dst": "Casa Verde Street"
+   },
+   {
+      "src": "Casa Verde Street ",
+      "dst": "Mineta San José International Airport"
+   },
+   {
+      "src": "Mineta San José International Airport",
+      "dst": "Casa Verde Street "
+   },
+   {
+      "src": "Mineta San José International Airport",
+      "dst": "San Jose State Univerity "
+   },
+   {
+      "src": "San Jose State Univerity ",
+      "dst": "Mineta San José International Airport"
+   },
+   {
+      "src": "Costco Wholesale, 1709 Automation Pkwy",
+      "dst": "San Jose State Univerisity"
+   },
+   {
+      "src": "San Jose State Univerisity",
+      "dst": "Costco Wholesale, 1709 Automation Pkwy"
+   },
+   {
+      "src": "San Jose State Univerisity",
+      "dst": "Avaya Stadium"
+   },
+   {
+      "src": "Avaya Stadium",
+      "dst": "San Jose State Univerisity"
+   },
+   {
+      "src": "DMV San Jose, 2222 Senter Rd",
+      "dst": "San Jose State Univerisity"
+   },
+   {
+      "src": "San Jose State Univerisity",
+      "dst": "DMV San Jose, 2222 Senter Rd"
+   },
+   {
+      "src": "MapR Technologies, 350 Holger Way",
+      "dst": "San Jose State Univerisity"
+   },
+   {
+      "src": "San Jose State Univerisity",
+      "dst": "MapR Technologies, 350 Holger Way"
+   },
+   {
+      "src": "Winchester Mystery House",
+      "dst": "San Jose State Univerisity"
+   },
+   {
+      "src": "San Jose State Univerisity",
+      "dst": "Winchester Mystery House"
+   },
+   {
+      "src": "N 1st Street ",
+      "dst": "Santana Row"
+   },
+   {
+      "src": "Santana Row",
+      "dst": "N 1st Street "
+   },
+   {
+      "src": "San Jose State Univerisity",
+      "dst": "Santana Row"
+   },
+   {
+      "src": "Santana Row",
+      "dst": "San Jose State Univerisity"
+   },
+   {
+      "src": "Alum Rock Park",
+      "dst": "San Jose State Univerisity"
+   },
+   {
+      "src": "San Jose State Univerisity",
+      "dst": "Alum Rock Park"
+   },
+   {
+      "src": "Casa Verde Street",
+      "dst": "Costco Wholesale, 1709 Automation Pkwy"
+   },
+   {
+      "src": "Costco Wholesale, 1709 Automation Pkwy",
+      "dst": "Casa Verde Street"
+   },
+   {
+      "src": "N 1st Street",
+      "dst": "Downtown San Jose"
+   },
+   {
+      "src": "Downtown San Jose",
+      "dst": "N 1st Street"
+   },
+   {
+      "src": "San Jose State Univerisity",
+      "dst": "1302,The Alameda"
+   },
+   {
+      "src": "San Jose State Univerisity",
+      "dst": "1302,The Alameda"
+   },
+   {
+      "src": "Mineta San José International Airport",
+      "dst": "1302,The Alameda"
+   },
+   {
+      "src": "1302,The Alameda",
+      "dst": "Mineta San José International Airport"
+   }
+]

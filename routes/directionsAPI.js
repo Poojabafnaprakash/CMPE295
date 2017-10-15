@@ -4,9 +4,9 @@ var googleMapsClient = require('@google/maps').createClient({
 });
 
 var fs = require('fs');
-var Combinatorics = require('js-combinatorics');
 var Client = require('node-rest-client').Client;
 var client = new Client();
+var cron = require('node-cron');
 
 
 exports.distance = function(req, res) {
@@ -41,11 +41,12 @@ exports.latLng = function(req, res) {
 let getSteps = function(req) {
 	  return new Promise(function(resolve, reject) {
 		  googleMapsClient.directions({
-				origin : req.param("source"),
-				destination : req.param("destination"),
-				mode : req.param("mode")
+				origin : req.body.source,
+				destination : req.body.destination,
+				mode : "driving"
 			}, function(err, response) {
 				if (!err) {
+					var finalMatch = [];
 					var finalSteps = []; var finalStepsObj = {}; var firstdirection = "";
 					for (var key in response.json.routes[0].legs[0].steps) {
 					    var htmlInstruction = response.json.routes[0].legs[0].steps[key].html_instructions;
@@ -60,43 +61,42 @@ let getSteps = function(req) {
 					    
 					    if(matches.length > 1 && !("maneuver" in response.json.routes[0].legs[0].steps[key]) ) {
 					    	finalStepsObj = {
-					    			"streetName" : matches[1],
-					    			"direction" : firstdirection,
+					    			"Street Name" : matches[1],
+					    			"Direction" : firstdirection,
 					    			"distanceCovered" : response.json.routes[0].legs[0].steps[key].distance.text,
-					    			"timeTaken" : response.json.routes[0].legs[0].steps[key].duration.text,
-					    			"startTime" : response.json.routes[0].legs[0].steps[key].duration.text
+					    			"timeTaken" : response.json.routes[0].legs[0].steps[key].duration.text
 					    	};
 					    } else if(matches.length > 1) {
 					    	firstdirection = mapDirections(firstdirection, response.json.routes[0].legs[0].steps[key].maneuver);
 					    	finalStepsObj = {
-					    			"streetName" : matches[1],
-					    			"direction" : firstdirection,
+					    			"Street Name" : matches[1],
+					    			"Direction" : firstdirection,
 					    			"distanceCovered" : response.json.routes[0].legs[0].steps[key].distance.text,
-					    			"timeTaken" : response.json.routes[0].legs[0].steps[key].duration.text,
-					    			"startTime" : response.json.routes[0].legs[0].steps[key].duration.text
+					    			"timeTaken" : response.json.routes[0].legs[0].steps[key].duration.text
 					    	};
 					    } else {
 					    	finalStepsObj = {
-					    			"streetName" : matches[0],
-					    			"direction" : firstdirection,
+					    			"Street Name" : matches[0],
+					    			"Direction" : firstdirection,
 					    			"distanceCovered" : response.json.routes[0].legs[0].steps[key].distance.text,
-					    			"timeTaken" : response.json.routes[0].legs[0].steps[key].duration.text,
-					    			"startTime" : response.json.routes[0].legs[0].steps[key].duration.text
+					    			"timeTaken" : response.json.routes[0].legs[0].steps[key].duration.text
 					    	};
 					    }
+					    finalMatch.push(matches);
 					    finalSteps.push(finalStepsObj);
 					}
+					//console.log(finalMatch);
 					var steps = {
 							"Summary":[
 								{ "Start": response.json.routes[0].legs[0].start_address },
 								{ "End": response.json.routes[0].legs[0].end_address },
 								{ "Time": response.json.routes[0].legs[0].duration.text },
-								{ "StartTime": req.param("time") },
+								{ "Start Time": req.param("time") },
 								{ "Day": req.param("day") }
 							],
 							"steps": finalSteps
 					}
-					console.log(steps);
+					//console.log(steps);
 					resolve(steps);
 				} else {
 					reject('Error getting response from Google');
@@ -105,34 +105,26 @@ let getSteps = function(req) {
 	});
 };
 
-
-
 let getCongestion = function(getStepsResult) {
 	return new Promise(function(resolve, reject) {
 		var args = {
 			    data: getStepsResult ,
 			    headers: { "Content-Type": "application/json" }
 		};
-		client.post("http://remote.site/rest/xml/method", args, function (data, response) {
-		    //console.log(data);
+		client.post("http://130.65.159.197:5000/getCongestion", args, function (data, response) {
 		    resolve(data);
 		}); 
+//		client.post("http://130.65.159.197:5000/traffic", args, function (data, response) {
+//		    resolve(data);
+//		}); 
+//		resolve([{"CongestionRate": "65%",
+//				   "StreetName": "W Julian St"}, 
+//				   {"CongestionRate": "34%",
+//					   "StreetName": "N 7th St"},
+//					   {"CongestionRate": "53",
+//						   "StreetName": "E San Fernando St"}]);
 	});
 };
-
-	let winIcecream = function(message) {
-	  return new Promise(function(resolve, reject) {
-	    resolve( message + ' won Icecream');
-	  });
-	};
-
-//	cleanRoom().then(function(result){
-//		return removeGarbage(result);
-//	}).then(function(result){
-//		return winIcecream(result);
-//	}).then(function(result){
-//		console.log('finished ' + result);
-//	})
 
 let mapDirections = function(direction, menuver) {
 	var newDirection;	
@@ -203,37 +195,95 @@ exports.directions = function(req, res) {
 	});
 };
 
+
+var task = cron.schedule('1-5 * * * *', function() {
+	var arr = fs.readFileSync(
+	'./cronjobstreets.json');
+var responseObj = [];
+var promises = [];
+//var listOfObjects = JSON.parse(arr);
+var listOfObjects = [
+   {
+	      "src": "Casa Verde Street",
+	      "dst": "San Jose State Univerisity"
+	   },
+	   {
+	      "src": "San Jose State Univerisity",
+	      "dst": "Casa Verde Street"
+	   }];
+var today = new Date();
+listOfObjects.forEach(function (arrayItem) {	   
+var cronJobObj = {};
+console.log(arrayItem);
+promises.push(
+googleMapsClient.directions({
+	origin : arrayItem.src + ', San Jose, CA',
+	destination : arrayItem.dst + ', San Jose, CA',
+	mode : 'driving'
+}).asPromise()
+  .then((response) => {	
+	cronJobObj['Source'] = arrayItem.src + ', San Jose, CA';
+	cronJobObj['Destination'] = arrayItem.dst + ', San Jose, CA';
+	cronJobObj['Date'] = today.getMonth() + "/"
+					+ today.getDate() + "/"
+					+ today.getFullYear();
+	cronJobObj['Time'] = today.getHours();
+	cronJobObj['TravelTime'] = response.json.routes[0].legs[0].duration;
+	cronJobObj['StartLatLng'] = response.json.routes[0].legs[0].start_location;
+	cronJobObj['EndLatLng'] = response.json.routes[0].legs[0].end_location;
+	cronJobObj['Steps'] = response.json.routes[0].legs[0].steps;
+	responseObj.push(cronJobObj);
+  })
+  .catch((err) => {
+    console.log(arrayItem.src + " " + arrayItem.dst+ " " +err);
+  }));		
+});
+
+Promise.all(promises).then(function() {
+var filename = './data/output-' + today.getMonth() + '-' + today.getDate() + '-' + today.getFullYear() + '-' + today.getHours() + '.json';
+fs.writeFile(filename, JSON.stringify(responseObj), { flag: "wx" }, function(err) {
+    if(err) {
+        return console.log(err);
+    }
+
+    console.log("The file was saved!");
+}); 
+}, function(err) {
+console.log(err);
+});	
+}, false);
+
+task.start();
+
 // to store in MongoDB - Source | Destination | Date | Time | TravelTime |
 // startLatlong | End Lat/long
+
 exports.cronJob = function(req, res) {
 	var arr = fs.readFileSync(
-			'./streets.txt').toString().split(
-			"\n");
-	var listOfObjects = [];
+			'./cronjobstreets.json');
 	var responseObj = [];
-	for(var i = 0; i < 1; i++) {
-		for(var j = 0; j < arr.length - 350; j++) {
-			if(arr[i] === arr[j]) continue;
-			var obj = {};
-	    	obj['src'] = arr[i];
-			obj['dst'] = arr[j];
-			listOfObjects.push(obj);
-		}	
-		console.log(Object.keys(listOfObjects).length);
-	}
 	var promises = [];
+//	var listOfObjects = JSON.parse(arr);
+	var listOfObjects = [
+		   {
+			      "src": "Casa Verde Street",
+			      "dst": "San Jose State Univerisity"
+			   },
+			   {
+			      "src": "San Jose State Univerisity",
+			      "dst": "Casa Verde Street"
+			   }];
+	var today = new Date();
 	listOfObjects.forEach(function (arrayItem) {	   
 		var cronJobObj = {};
-		//console.log(arrayItem);
+		console.log(arrayItem);
 		promises.push(
 		googleMapsClient.directions({
 			origin : arrayItem.src + ', San Jose, CA',
 			destination : arrayItem.dst + ', San Jose, CA',
 			mode : 'driving'
 		}).asPromise()
-		  .then((response) => {
-			var today = new Date();
-				
+		  .then((response) => {	
 			cronJobObj['Source'] = arrayItem.src + ', San Jose, CA';
 			cronJobObj['Destination'] = arrayItem.dst + ', San Jose, CA';
 			cronJobObj['Date'] = today.getMonth() + "/"
@@ -243,6 +293,7 @@ exports.cronJob = function(req, res) {
 			cronJobObj['TravelTime'] = response.json.routes[0].legs[0].duration;
 			cronJobObj['StartLatLng'] = response.json.routes[0].legs[0].start_location;
 			cronJobObj['EndLatLng'] = response.json.routes[0].legs[0].end_location;
+			cronJobObj['Steps'] = response.json.routes[0].legs[0].steps;
 			responseObj.push(cronJobObj);
 		  })
 		  .catch((err) => {
@@ -251,7 +302,8 @@ exports.cronJob = function(req, res) {
 	});
 	
 	Promise.all(promises).then(function() {
-		fs.writeFile("./output.txt", JSON.stringify(responseObj), function(err) {
+		var filename = './data/output-' + today.getMonth() + '-' + today.getDate() + '-' + today.getFullYear() + '-' + today.getHours() + '.json';
+		fs.writeFile(filename, JSON.stringify(responseObj), { flag: "wx" }, function(err) {
 		    if(err) {
 		        return console.log(err);
 		    }
@@ -263,3 +315,69 @@ exports.cronJob = function(req, res) {
 		console.log(err);
 	});	
 }
+
+
+
+
+
+
+
+
+//exports.cronJob = function(req, res) {
+//	var arr = fs.readFileSync(
+//			'./streets.txt').toString().split(
+//			"\n");
+//	var listOfObjects = [];
+//	var responseObj = [];
+//	for(var i = 0; i < 1; i++) {
+//		for(var j = 0; j < arr.length - 350; j++) {
+//			if(arr[i] === arr[j]) continue;
+//			var obj = {};
+//	    	obj['src'] = arr[i];
+//			obj['dst'] = arr[j];
+//			listOfObjects.push(obj);
+//		}	
+//		console.log(Object.keys(listOfObjects).length);
+//	}
+//	var promises = [];
+//	listOfObjects.forEach(function (arrayItem) {	   
+//		var cronJobObj = {};
+//		//console.log(arrayItem);
+//		promises.push(
+//		googleMapsClient.directions({
+//			origin : arrayItem.src + ', San Jose, CA',
+//			destination : arrayItem.dst + ', San Jose, CA',
+//			mode : 'driving'
+//		}).asPromise()
+//		  .then((response) => {
+//			var today = new Date();
+//				
+//			cronJobObj['Source'] = arrayItem.src + ', San Jose, CA';
+//			cronJobObj['Destination'] = arrayItem.dst + ', San Jose, CA';
+//			cronJobObj['Date'] = today.getMonth() + "/"
+//							+ today.getDate() + "/"
+//							+ today.getFullYear();
+//			cronJobObj['Time'] = today.getHours();
+//			cronJobObj['TravelTime'] = response.json.routes[0].legs[0].duration;
+//			cronJobObj['StartLatLng'] = response.json.routes[0].legs[0].start_location;
+//			cronJobObj['EndLatLng'] = response.json.routes[0].legs[0].end_location;
+//			responseObj.push(cronJobObj);
+//		  })
+//		  .catch((err) => {
+//		    console.log(arrayItem.src + " " + arrayItem.dst+ " " +err);
+//		  }));		
+//	});
+//	
+//	Promise.all(promises).then(function() {
+//		fs.writeFile("./output.txt", JSON.stringify(responseObj), function(err) {
+//		    if(err) {
+//		        return console.log(err);
+//		    }
+//
+//		    console.log("The file was saved!");
+//		}); 
+//		res.send(responseObj); 
+//	}, function(err) {
+//		console.log(err);
+//	});	
+//}
