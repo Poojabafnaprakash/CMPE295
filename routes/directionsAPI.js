@@ -1,7 +1,10 @@
 var googleMapsClient = require('@google/maps').createClient({
-	key : 'AIzaSyDwoug5gmlX3edUXItz1b8MJMcveKFEu1A',
+	key : 'AIzaSyB6QhWNhYtzfJeipEvQO-gaoic6egCxNmQ',
 	Promise: Promise
 });
+
+//Previous key: AIzaSyDwoug5gmlX3edUXItz1b8MJMcveKFEu1A
+
 
 var fs = require('fs');
 var Client = require('node-rest-client').Client;
