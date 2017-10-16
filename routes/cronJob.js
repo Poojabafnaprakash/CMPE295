@@ -9,8 +9,8 @@ var client = new Client();
 var cron = require('node-cron');
 
 
-//var task = cron.schedule('* */59 * * * *', function() {
-var task = cron.schedule('*/2 * * * *', function() {
+var task = cron.schedule('*/30 * * * *', function() {
+//var task = cron.schedule('*/2 * * * *', function() {
 	var arr = fs.readFileSync(
 	'../cronjobstreets.json');
 var responseObj = [];
