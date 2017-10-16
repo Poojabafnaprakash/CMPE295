@@ -1,9 +1,11 @@
 var googleMapsClient = require('@google/maps').createClient({
-	key : 'AIzaSyB6QhWNhYtzfJeipEvQO-gaoic6egCxNmQ',
+	key : 'AIzaSyCEkzGdbrRZw9NyFeiccZdoac2FBOyKW1g',
 	Promise: Promise
 });
 
 //Previous key: AIzaSyDwoug5gmlX3edUXItz1b8MJMcveKFEu1A
+//key : 'AIzaSyB6QhWNhYtzfJeipEvQO-gaoic6egCxNmQ',
+//key: AIzaSyCEkzGdbrRZw9NyFeiccZdoac2FBOyKW1g
 
 
 var fs = require('fs');
@@ -266,16 +268,16 @@ exports.cronJob = function(req, res) {
 			'./cronjobstreets.json');
 	var responseObj = [];
 	var promises = [];
-//	var listOfObjects = JSON.parse(arr);
-	var listOfObjects = [
-		   {
-			      "src": "Casa Verde Street",
-			      "dst": "San Jose State Univerisity"
-			   },
-			   {
-			      "src": "San Jose State Univerisity",
-			      "dst": "Casa Verde Street"
-			   }];
+	var listOfObjects = JSON.parse(arr);
+//	var listOfObjects = [
+//		   {
+//			      "src": "Casa Verde Street",
+//			      "dst": "San Jose State Univerisity"
+//			   },
+//			   {
+//			      "src": "San Jose State Univerisity",
+//			      "dst": "Casa Verde Street"
+//			   }];
 	var today = new Date();
 	listOfObjects.forEach(function (arrayItem) {	   
 		var cronJobObj = {};
@@ -327,21 +329,22 @@ exports.cronJob = function(req, res) {
 
 
 //exports.cronJob = function(req, res) {
-//	var arr = fs.readFileSync(
-//			'./streets.txt').toString().split(
-//			"\n");
+////	var arr = fs.readFileSync(
+////			'./streets.txt').toString().split(
+////			"\n");
 //	var listOfObjects = [];
 //	var responseObj = [];
-//	for(var i = 0; i < 1; i++) {
-//		for(var j = 0; j < arr.length - 350; j++) {
-//			if(arr[i] === arr[j]) continue;
-//			var obj = {};
-//	    	obj['src'] = arr[i];
-//			obj['dst'] = arr[j];
-//			listOfObjects.push(obj);
-//		}	
-//		console.log(Object.keys(listOfObjects).length);
-//	}
+////	for(var i = 0; i < 1; i++) {
+////		for(var j = 0; j < arr.length - 350; j++) {
+////			if(arr[i] === arr[j]) continue;
+////			var obj = {};
+////	    	obj['src'] = arr[i];
+////			obj['dst'] = arr[j];
+////			listOfObjects.push(obj);
+////		}	
+////		console.log(Object.keys(listOfObjects).length);
+////	}
+//	listOfObjects = [{ "src": "Casa Verde Street", "dst": "San Jose State Univerisity"},{ "src": "San Jose State Univerisity","dst": "Casa Verde Street"}];
 //	var promises = [];
 //	listOfObjects.forEach(function (arrayItem) {	   
 //		var cronJobObj = {};

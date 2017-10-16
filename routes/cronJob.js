@@ -1,5 +1,5 @@
 var googleMapsClient = require('@google/maps').createClient({
-	key : 'AIzaSyDwoug5gmlX3edUXItz1b8MJMcveKFEu1A',
+	key : 'AIzaSyCEkzGdbrRZw9NyFeiccZdoac2FBOyKW1g',
 	Promise: Promise
 });
 
@@ -9,7 +9,8 @@ var client = new Client();
 var cron = require('node-cron');
 
 
-var task = cron.schedule('* */59 * * * *', function() {
+//var task = cron.schedule('* */59 * * * *', function() {
+var task = cron.schedule('*/2 * * * *', function() {
 	var arr = fs.readFileSync(
 	'../cronjobstreets.json');
 var responseObj = [];
@@ -44,7 +45,7 @@ listOfObjects.forEach(function (arrayItem) {
 	});
 	
 	Promise.all(promises).then(function() {
-		var filename = '../data/output-' + today.getMonth() + '-' + today.getDate() + '-' + today.getFullYear() + '-' + today.getHours() + '.json';
+		var filename = '../data/output-' + today.getMonth() + '-' + today.getDate() + '-' + today.getFullYear() + '-' + today.getHours() + '-'+ today.getMinutes() +'.json';
 		fs.writeFile(filename, JSON.stringify(responseObj), { flag: "wx" }, function(err) {
 		    if(err) {
 		        return console.log(err);

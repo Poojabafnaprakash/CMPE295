@@ -44,7 +44,7 @@ app.get('/distance', directionsAPI.distance);
 app.get('/time', directionsAPI.totalTime);
 app.get('/latlng', directionsAPI.latLng);
 
-app.get('/api/cronJob', directionsAPI.cronJob);
+app.use('/api/cronJob', directionsAPI.cronJob);
 app.post('/api/userInput', directionsAPI.userInput);
 app.post('/api/checklogin', login.checkLogin);
 app.post('/api/register', login.register);
