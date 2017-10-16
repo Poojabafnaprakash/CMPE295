@@ -1,5 +1,5 @@
 var googleMapsClient = require('@google/maps').createClient({
-	key : 'AIzaSyCEkzGdbrRZw9NyFeiccZdoac2FBOyKW1g',
+	key : 'AIzaSyC8rg2gqE55sZqXFwsyYgz-OpmEBqHRXvs',
 	Promise: Promise
 });
 
@@ -10,7 +10,7 @@ var cron = require('node-cron');
 
 
 //var task = cron.schedule('*/30 * * * *', function() {
-var task = cron.schedule('*/1 * * * *', function() {
+var task = cron.schedule('*/30 * * * *', function() {
 	var arr = fs.readFileSync(
 	'../cronjobstreets.json');
 var responseObj = [];
