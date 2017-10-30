@@ -8,8 +8,6 @@ var Client = require('node-rest-client').Client;
 var client = new Client();
 var cron = require('node-cron');
 
-
-//var task = cron.schedule('*/30 * * * *', function() {
 var task = cron.schedule('*/30 * * * *', function() {
 	var arr = fs.readFileSync(
 	'../cronjobstreets.json');

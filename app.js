@@ -11,6 +11,7 @@ var express = require('express')
   , directionsAPI = require('./routes/directionsAPI')
   , index = require('./routes/index')
   , login = require("./routes/login")
+  , favorite = require("./routes/favorite")
   , user = require('./routes/user');
 
 var app = express();
@@ -50,6 +51,8 @@ app.post('/api/checklogin', login.checkLogin);
 app.post('/api/register', login.register);
 app.get('/api/homepage',login.redirectToHomepage);
 app.post('/api/logout',login.logout);
+app.post('/api/setFavorite',favorite.setFavorite);
+
 
 http.createServer(app).listen(app.get('port'), "0.0.0.0", function(){
   console.log('Express server listening on port ' + app.get('port'));

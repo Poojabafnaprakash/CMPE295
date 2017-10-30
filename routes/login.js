@@ -14,7 +14,7 @@ exports.checkLogin = function(req, res) {
 	var email = req.param("email");
 	var password = req.param("password");
 	var json_responses;
-	var getUser = "select * from members where email='" + email
+	var getUser = "select * from Users where email='" + email
 			+ "'";
 	log.info(getUser);
 	mysql.fetchData(function(err, results) {
@@ -75,7 +75,7 @@ exports.register = function(req, res) {
 	var json_responses;
 	var dt = new Date();
 	var ciphertext = CryptoJS.AES.encrypt(password, 'cmpe295');
-	var insertUser = "insert into members(email,password,firstName,lastName,lastlogin,phone) values('"
+	var insertUser = "insert into Users(email,password,firstName,lastName,lastlogin,phone) values('"
 			+ email
 			+ "','"
 			+ ciphertext
@@ -149,7 +149,7 @@ exports.userprofile = function(req, res) {
 exports.logout = function(req, res) {
 	log.info("The user "+req.session.id+ "logging out");
 	var dt = new Date();
-	updateUser = "update members set lastlogin= '" + dt.toString() + "' where user_id="
+	updateUser = "update Users set lastlogin= '" + dt.toString() + "' where user_id="
 			+ req.session.id;
 	mysql.updateData(function(err, results) {
 		console.log("DB Results:" + results);
