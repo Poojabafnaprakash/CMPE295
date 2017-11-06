@@ -30,7 +30,7 @@ export class UserService {
         let options = new RequestOptions({ headers: cpHeaders });
         console.log(user);
         return this.http.post(this.userUrl, user, options)
-               .map(success => success.status)
+               .map(success => success.json().statusCode)
                .catch(this.handleError);
   }
 

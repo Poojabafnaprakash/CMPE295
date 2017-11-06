@@ -3,23 +3,26 @@
     <div id="map" class="col-sm-9">
     </div>
     <div class="col-sm-3">
-      <form class="margin-input" (ngSubmit)="onSubmit(userInputForm)" #userInputForm="ngForm">
+      <form ngNativeValidate class="margin-input" (ngSubmit)="onSubmit(userInputForm)" #userInputForm="ngForm">
         <div class="form-group">
           <h5>Enter source:</h5>
-          <input type="text" class="form-control" id="source" placeholder="Enter source" [(ngModel)]="userInput.source" name="source">
+          <input type="text" class="form-control" id="source" placeholder="Enter source" [(ngModel)]="userInput.source" name="source" required />
         </div>
         <div class="form-group">
           <h5>Enter destination:</h5>
-          <input type="text" class="form-control" id="destination" placeholder="Enter destination" [(ngModel)]="userInput.destination" name="destination">
+          <input type="text" class="form-control" id="destination" placeholder="Enter destination" [(ngModel)]="userInput.destination" name="destination" required />
         </div>
         <div class="form-group">
           <h5>Enter day:</h5>
-          <input type="text" class="form-control" id="day" placeholder="Enter day" [(ngModel)]="userInput.day" name="day">
+          <input type="text" class="form-control" id="day" placeholder="Enter day" [(ngModel)]="userInput.day" name="day" required />
         </div>
         <div class="form-group">
           <h5>Enter time:</h5>
-          <input type="text" class="form-control" id="time" placeholder="Enter time(hh:mm:ss)" [(ngModel)]="userInput.time" name="time">
+          <input type="text" class="form-control" id="time" placeholder="Enter time(hh:mm:ss)" [(ngModel)]="userInput.time" name="time" required />
         </div>
+        <button (click)="setFav(userInputForm)" class="btn btn-warning btn-fill">
+          <span class="glyphicon glyphicon-heart"></span>Add Favorite
+        </button>
         <button type="submit" class="btn btn-info btn-fill">Get Results</button>
       </form>
       <h5>

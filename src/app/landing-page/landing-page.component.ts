@@ -24,8 +24,11 @@ export class LandingPageComponent implements OnInit {
   login(userForm: NgForm) {
     this.userService.login(this.user)
     .subscribe(successCode => {
-      this.userService.setUserLoggedIn();
-      this.router.navigate(['main/dashboard']);
+      console.log(successCode);
+      if(successCode == 200) {
+        this.userService.setUserLoggedIn();
+        this.router.navigate(['main/dashboard']);
+      }
     }, errorCode => console.log("error logging in."));
   }
 
