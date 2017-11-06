@@ -41,12 +41,18 @@ export class MapsComponent implements OnInit {
     this.userInput = new UserInput(1, "", "", "", "");
   }
 
-  setFav(userInputForm: NgForm) {
-    console.log(this.userInput);
+  setFav(source: string, destination: string, dayOfWeek: string, timeOfDay: string) {
+    console.log(source);
     console.log("in setFav");
+    this.userInputService.setFavorite(this.userInput)
+    .subscribe(successCode => {
+      console.log(successCode);
+    },
+    errorCode => this.statusCode = errorCode);
   }
 
   onSubmit(userInputForm: NgForm) {
+    console.log(this.userInput);
     this.statusCode = null;
     this.userInputService.create(this.userInput)
     .subscribe(successCode => {

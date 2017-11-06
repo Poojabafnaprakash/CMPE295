@@ -25,4 +25,12 @@ export class UserInputService {
 		return Observable.throw(error.status);
     }
 
+    setFavorite(userInput: UserInput):Observable<number> {
+      let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
+          let options = new RequestOptions({ headers: cpHeaders });
+          return this.http.post('/api/setFavorite', userInput, options)
+            .map(success => success.json().statusCode)
+            .catch(this.handleError);
+      }
+
 }
