@@ -9,8 +9,6 @@ log = SimpleNodeLogger.createSimpleLogger( opts );
 var log = SimpleNodeLogger.createSimpleFileLogger('project.log');
 
 exports.checkLogin = function(req, res) {
-	// These two variables come from the form on
-	// the views/login.hbs page
 	var email = req.param("email");
 	var password = req.param("password");
 	var json_responses;

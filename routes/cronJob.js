@@ -56,4 +56,4 @@ listOfObjects.forEach(function (arrayItem) {
 	});	
 }, false);
 
-task.start();
+//task.start();

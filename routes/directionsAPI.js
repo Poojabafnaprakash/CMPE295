@@ -2,6 +2,8 @@ var googleMapsClient = require('@google/maps').createClient({
 	key : 'AIzaSyC8rg2gqE55sZqXFwsyYgz-OpmEBqHRXvs',
 	Promise: Promise
 });
+var mysql = require('./mysql');
+
 
 //Previous key: AIzaSyDwoug5gmlX3edUXItz1b8MJMcveKFEu1A
 //key : 'AIzaSyB6QhWNhYtzfJeipEvQO-gaoic6egCxNmQ',
@@ -41,8 +43,28 @@ exports.totalTime = function(req, res) {
 };
 
 exports.latLng = function(req, res) {
-	console.log(req.body.source);
-	res.send("{success: 200}");
+	googleMapsClient.directions({
+		origin : req.param("source"),
+		destination : req.param("destination"),
+		mode : "driving"
+	}, function(err, response) {
+		if (!err) {
+			var json_responses = {};
+			var stepsLatLng =[];
+			stepsLatLng.push(response.json.routes[0].legs[0].steps[0].start_location);
+			for (var key in response.json.routes[0].legs[0].steps){
+				stepsLatLng.push(response.json.routes[0].legs[0].steps[key].end_location);
+			}
+			json_responses = {
+					"srcLat":response.json.routes[0].legs[0].start_location.lat,
+					"srcLng":response.json.routes[0].legs[0].start_location.lng,
+					"dstLat":response.json.routes[0].legs[0].end_location.lat,
+					"dstLng":response.json.routes[0].legs[0].end_location.lng,
+					"latLngSteps": stepsLatLng
+			}
+			res.send(json_responses);
+		}
+	});
 };
 
 let getSteps = function(req) {
@@ -185,6 +207,33 @@ exports.userInput = function(req, res) {
 	getSteps(req).then(function(result){
 		return getCongestion(result)	
 	}).then(function(congestionResult){
+		var source = req.param("source");
+		var destination = req.param("destination");
+		var timeOfDay = req.param("time");
+		var dayOfWeek = req.param("day");
+		var json_responses;
+		var insertUserInput = "insert into Travel(uid, src, dst, timeOfDay, dayOfWeek) select id, '"
+				+ source
+				+ "','"
+				+ destination
+				+ "','"
+				+ timeOfDay
+				+ "','"
+				+ dayOfWeek
+				+ "' from Users where email='"
+				+ req.session.email
+				+ "'";
+		console.log("before mysql: "+insertUserInput);
+		mysql.insertData(function(err, results) {
+			if (err) {
+				throw err;
+			} else {
+				json_responses = {
+					"statusCode" : 200
+				};
+				res.send(json_responses);
+			}
+		}, insertUserInput);
 		res.send(congestionResult);
 	})	
 };
@@ -260,7 +309,7 @@ console.log(err);
 });	
 }, false);
 
-task.start();
+//task.start();
 
 // to store in MongoDB - Source | Destination | Date | Time | TravelTime |
 // startLatlong | End Lat/long
