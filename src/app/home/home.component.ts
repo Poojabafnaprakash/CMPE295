@@ -40,14 +40,14 @@ export class HomeComponent implements OnInit {
         y: function(d) { return d.value; },
         showValues: true,
         valueFormat: function(d) {
-          return d3.format(',.4f')(d);
+          return d3.format(',.0f')(d);
         },
         duration: 500,
         xAxis: {
-          axisLabel: 'X Axis'
+          axisLabel: 'Time (hours)'
         },
         yAxis: {
-          axisLabel: 'Y Axis',
+          axisLabel: 'Travel time (min)',
           axisLabelDistance: -10
         }
       }
@@ -56,36 +56,100 @@ export class HomeComponent implements OnInit {
       {
         values: [
           {
-            "label": "A",
-            "value": 29.765957771107
+            "label": "0",
+            "value": 15
           },
           {
-            "label": "B",
-            "value": 0
+            "label": "1",
+            "value": 14
           },
           {
-            "label": "C",
-            "value": 32.807804682612
+            "label": "2",
+            "value": 13
           },
           {
-            "label": "D",
-            "value": 196.45946739256
+            "label": "3",
+            "value": 14
           },
           {
-            "label": "E",
-            "value": 0.19434030906893
+            "label": "4",
+            "value": 13
           },
           {
-            "label": "F",
-            "value": 98.079782601442
+            "label": "5",
+            "value": 14
           },
           {
-            "label": "G",
-            "value": 13.925743130903
+            "label": "6",
+            "value": 14
           },
           {
-            "label": "H",
-            "value": 5.1387322875705
+            "label": "7",
+            "value": 18
+          },
+          {
+            "label": "8",
+            "value": 21
+          },
+          {
+            "label": "9",
+            "value": 22
+          },
+          {
+            "label": "10",
+            "value": 18
+          },
+          {
+            "label": "11",
+            "value": 17
+          },
+          {
+            "label": "12",
+            "value": 17
+          },
+          {
+            "label": "13",
+            "value": 16
+          },
+          {
+            "label": "14",
+            "value": 16
+          },
+          {
+            "label": "15",
+            "value": 15
+          },
+          {
+            "label": "16",
+            "value": 17
+          },
+          {
+            "label": "17",
+            "value": 18
+          },
+          {
+            "label": "18",
+            "value": 23
+          },
+          {
+            "label": "19",
+            "value": 22
+          },
+          {
+            "label": "20",
+            "value": 18
+          },
+          {
+            "label": "21",
+            "value": 16
+          },
+          {
+            "label": "22",
+            "value": 16
+          },
+          {
+            "label": "23",
+            "value": 15
           }
         ]
       }
@@ -103,36 +167,126 @@ export class HomeComponent implements OnInit {
           bottom: 40,
           left: 55
         },
-        x: function(d) { return d.x; },
-        y: function(d) { return d.y; },
+        x: function(d) { return d.label; },
+        y: function(d) { return d.value; },
         useInteractiveGuideline: true,
         xAxis: {
-          axisLabel: 'Time (ms)'
+          axisLabel: 'Time (hours)'
         },
         yAxis: {
-          axisLabel: 'Voltage (v)',
+          axisLabel: 'Congestion Rate (%)',
           tickFormat: function(d) {
-            return d3.format('.02f')(d);
+            return d3.format('.0f')(d);
           },
           axisLabelDistance: -10
         }
       }
     };
-    this.data2 = this.sinAndCos();
+    this.data2 = this.congestionRate();
   }
 
-  sinAndCos() {
-    var sin2 = [];
-
-    //Data is represented as an array of {x,y} pairs.
-    for (var i = 0; i < 100; i++) {
-      sin2.push({ x: i, y: i % 10 == 5 ? null : Math.sin(i / 10) * 0.25 + 0.5 });
-    }
+  congestionRate() {
+    var congestionRateValue = [{
+      "label": 0,
+      "value": 10
+    },
+    {
+      "label": 1,
+      "value": 11
+    },
+    {
+      "label": 2,
+      "value": 11
+    },
+    {
+      "label": 3,
+      "value": 9
+    },
+    {
+      "label": 4,
+      "value": 10
+    },
+    {
+      "label": 5,
+      "value": 30
+    },
+    {
+      "label": 6,
+      "value": 35
+    },
+    {
+      "label": 7,
+      "value": 38
+    },
+    {
+      "label": 8,
+      "value": 75
+    },
+    {
+      "label": 9,
+      "value": 90
+    },
+    {
+      "label": 10,
+      "value": 85
+    },
+    {
+      "label": 11,
+      "value": 50
+    },
+    {
+      "label": 12,
+      "value": 23
+    },
+    {
+      "label": 13,
+      "value": 24
+    },
+    {
+      "label": 14,
+      "value": 15
+    },
+    {
+      "label": 15,
+      "value": 14
+    },
+    {
+      "label": 16,
+      "value": 13
+    },
+    {
+      "label": 17,
+      "value": 90
+    },
+    {
+      "label": 18,
+      "value": 93
+    },
+    {
+      "label": 19,
+      "value": 96
+    },
+    {
+      "label": 20,
+      "value": 94
+    },
+    {
+      "label": 21,
+      "value": 85
+    },
+    {
+      "label": 22,
+      "value": 70
+    },
+    {
+      "label": 23,
+      "value": 50
+    }];
 
     return [
       {
-        values: sin2,
-        key: 'Another sine wave',
+        values: congestionRateValue,
+        key: 'Congestion Rate',
         color: '#7777ff',
         area: true
       }
