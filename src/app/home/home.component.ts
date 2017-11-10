@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
-import { LegendItem, ChartType } from '../lbd/lbd-chart/lbd-chart.component';
-import * as Chartist from 'chartist';
+import { RouteGraph } from './model/routegraph';
+import { NgForm } from '@angular/forms';
+
 declare let d3: any;
 
 @Component({
@@ -15,9 +16,16 @@ declare let d3: any;
 export class HomeComponent implements OnInit {
   options;
   data;
+  options2;
+  data2;
+  routeGraphTravelTime: RouteGraph;
+  routeGraphCongestionRate: RouteGraph;
   constructor() { }
 
   ngOnInit() {
+    this.routeGraphTravelTime = new RouteGraph("", "");
+    this.routeGraphCongestionRate = new RouteGraph("", "");
+    //1st graph
     this.options = {
       chart: {
         type: 'discreteBarChart',
@@ -46,7 +54,6 @@ export class HomeComponent implements OnInit {
     }
     this.data = [
       {
-        key: "Cumulative Return",
         values: [
           {
             "label": "A",
@@ -83,5 +90,59 @@ export class HomeComponent implements OnInit {
         ]
       }
     ];
+
+
+    //second graph
+    this.options2 = {
+      chart: {
+        type: 'lineChart',
+        height: 450,
+        margin: {
+          top: 20,
+          right: 20,
+          bottom: 40,
+          left: 55
+        },
+        x: function(d) { return d.x; },
+        y: function(d) { return d.y; },
+        useInteractiveGuideline: true,
+        xAxis: {
+          axisLabel: 'Time (ms)'
+        },
+        yAxis: {
+          axisLabel: 'Voltage (v)',
+          tickFormat: function(d) {
+            return d3.format('.02f')(d);
+          },
+          axisLabelDistance: -10
+        }
+      }
+    };
+    this.data2 = this.sinAndCos();
+  }
+
+  sinAndCos() {
+    var sin2 = [];
+
+    //Data is represented as an array of {x,y} pairs.
+    for (var i = 0; i < 100; i++) {
+      sin2.push({ x: i, y: i % 10 == 5 ? null : Math.sin(i / 10) * 0.25 + 0.5 });
+    }
+
+    return [
+      {
+        values: sin2,
+        key: 'Another sine wave',
+        color: '#7777ff',
+        area: true
+      }
+    ];
+  }
+
+  getRouteTavelTime(routeTavelTimeForm: NgForm) {
+    console.log("in route travel time form");
+  }
+  getRouteCongestionRate(routeCongestionTimeForm: NgForm) {
+    console.log("in route congestion rate form");
   }
 }
