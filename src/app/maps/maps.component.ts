@@ -26,6 +26,7 @@ export class MapsComponent implements OnInit {
   statusCode: number;
   predictionResult: PredictedResults;
   latlngResponse: LatLng;
+  showCongestionRateTable: boolean = false;
 
   constructor(private userInputService: UserInputService) { }
 
@@ -74,42 +75,6 @@ export class MapsComponent implements OnInit {
     this.userInputService.getLatLng(this.userInput)
       .subscribe(successCode => {
         this.latlngResponse = successCode;
-        // var pointA = new google.maps.LatLng(successCode.srcLat, successCode.srcLng),
-        //   pointB = new google.maps.LatLng(successCode.dstLat, successCode.dstLng);
-        // const myOptions = {
-        //   zoom: 7,
-        //   center: pointA
-        // },
-        //   map = new google.maps.Map(document.getElementById('map'), myOptions),
-        //   // Instantiate a directions service.
-        //   directionsService = new google.maps.DirectionsService,
-        //   directionsDisplay = new google.maps.DirectionsRenderer({
-        //     map: map
-        //   }),
-        //   markerA = new google.maps.Marker({
-        //     position: pointA,
-        //     title: this.userInput.source,
-        //     label: "S",
-        //     map: map
-        //   }),
-        //   markerB = new google.maps.Marker({
-        //     position: pointB,
-        //     title: this.userInput.destination,
-        //     label: "D",
-        //     map: map
-        //   });
-        // console.log(pointA);
-        // // get route from A to B
-        // this.calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB);
-        // for (var i = 0; i < successCode.latLngSteps.length; i++) {
-        //   console.log(successCode.latLngSteps[i]);
-        //   var infowindow = new google.maps.InfoWindow({
-        //     content: 'Hello World!',
-        //     map: map,
-        //     position: new google.maps.LatLng(successCode.latLngSteps[i].lat, successCode.latLngSteps[i].lng)
-        //   });
-        // }
-
       },
       errorCode => this.statusCode = errorCode);
 
@@ -117,6 +82,8 @@ export class MapsComponent implements OnInit {
     this.userInputService.create(this.userInput)
       .subscribe(successCode => {
         this.predictionResult = successCode;
+        this.showCongestionRateTable = true;
+        console.log(this.latlngResponse);
         var pointA = new google.maps.LatLng(this.latlngResponse.srcLat, this.latlngResponse.srcLng),
           pointB = new google.maps.LatLng(this.latlngResponse.dstLat, this.latlngResponse.dstLng);
         const myOptions = {
@@ -141,11 +108,11 @@ export class MapsComponent implements OnInit {
             label: "D",
             map: map
           });
-        console.log(pointA);
+
         // get route from A to B
         this.calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB);
 
-        //plot infowindow for all routes CongestionRate 
+        //plot infowindow for all routes CongestionRate
         for (var i = 0; i < this.latlngResponse.latLngSteps.length; i++) {
           console.log(this.latlngResponse.latLngSteps[i]);
           var infowindow = new google.maps.InfoWindow({
@@ -154,6 +121,9 @@ export class MapsComponent implements OnInit {
             position: new google.maps.LatLng(this.latlngResponse.latLngSteps[i].lat, this.latlngResponse.latLngSteps[i].lng)
           });
         }
+
+        var trafficLayer = new google.maps.TrafficLayer();
+        trafficLayer.setMap(map);
       },
       errorCode => this.statusCode = errorCode);
   }
