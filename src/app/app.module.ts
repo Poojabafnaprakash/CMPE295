@@ -8,7 +8,6 @@ import { AppRoutingModule } from './app.routing';
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { FooterModule } from './shared/footer/footer.module';
 import { SidebarModule } from './sidebar/sidebar.module';
-import { LbdModule } from './lbd/lbd.module';
 
 import { AppComponent } from './app.component';
 
@@ -21,7 +20,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserInputService } from './maps/user-input.service';
 import { UserService } from './landing-page/user.service';
-import { AuthGuard } from './auth.guard'
+import { AuthGuard } from './auth.guard';
+import { NvD3Module } from 'ng2-nvd3';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,7 @@ import { AuthGuard } from './auth.guard'
     SidebarModule,
     RouterModule,
     AppRoutingModule,
-    LbdModule
+    NvD3Module
   ],
   providers: [UserInputService, UserService, AuthGuard],
   bootstrap: [AppComponent]
