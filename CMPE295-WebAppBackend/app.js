@@ -11,6 +11,7 @@ var express = require('express')
     , index = require('./routes/index')
     , login = require("./routes/login")
     , favorite = require("./routes/favorite")
+    , graphs = require("./routes/graphs")
     , user = require('./routes/user');
 
 var app = express();
@@ -51,6 +52,8 @@ app.post('/api/register', login.register);
 app.get('/api/homepage', login.redirectToHomepage);
 app.post('/api/logout', login.logout);
 app.post('/api/setFavorite', favorite.setFavorite);
+app.post('/api/routeTavelTime', graphs.setRouteTavelTime);
+app.post('/api/routeCongestionRate', graphs.setRouteCongestionRate);
 
 http.createServer(app).listen(app.get('port'), "0.0.0.0", function () {
     console.log('Express server listening on port ' + app.get('port'));
