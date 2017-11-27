@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { UserInputForPresent } from './model/userInputForPresent';
+import { UserInput } from './model/userInput';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
 declare interface TableData {
     headerRow: string[];
@@ -18,7 +22,7 @@ export class TablesComponent implements OnInit {
 
   ngOnInit() {
       this.tableData1 = {
-          headerRow: [ 'ID', 'Name', 'Country', 'City', 'Salary'],
+          headerRow: [ 'S.No.', 'Street Name', 'Direction', 'Congestion Rate', 'Expected Time Delay'],
           dataRows: [
               ['1', 'Dakota Rice', 'Niger', 'Oud-Turnhout', '$36,738'],
               ['2', 'Minerva Hooper', 'Curaçao', 'Sinaai-Waas', '$23,789'],
@@ -29,7 +33,7 @@ export class TablesComponent implements OnInit {
           ]
       };
       this.tableData2 = {
-          headerRow: [ 'ID', 'Name',  'Salary', 'Country', 'City' ],
+          headerRow: [ 'S.No.', 'Street Name', 'Direction', 'Congestion Rate', 'Expected Time Delay'],
           dataRows: [
               ['1', 'Dakota Rice','$36,738', 'Niger', 'Oud-Turnhout' ],
               ['2', 'Minerva Hooper', '$23,789', 'Curaçao', 'Sinaai-Waas'],
@@ -39,6 +43,13 @@ export class TablesComponent implements OnInit {
               ['6', 'Mason Porter', '$78,615', 'Chile', 'Gloucester' ]
           ]
       };
+
+}
+
+
+  submitCPForm(presentCongestionForm: NgForm) {
+    console.log("write the post request");
   }
 
 }
+

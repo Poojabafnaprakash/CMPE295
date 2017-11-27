@@ -4,10 +4,18 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="header">
-                        <h4 class="title">Striped Table with Hover</h4>
-                        <p class="category">Here is a subtitle for this table</p>
+                        <h4 class="title"> Current Congestion Rate of Route</h4>
+                        <p class="category">Congestion rate on each street</p>
                     </div>
                     <div class="content table-responsive table-full-width">
+         <form ngNativeValidate class="" (ngSubmit)="submitCPForm(presentCongestionForm)" #presentCongestionForm="ngForm">
+              <div class="form-group col-xs-3" style="padding-left: 0px;"> <input type="text" class="form-control" id="source" placeholder="Enter source" required /> </div>
+              <div class="form-group col-xs-3" style="padding-left: 0px;"> <input type="text" class="form-control" id="destination" placeholder="Enter destination" #destination name="destination" required /> </div>
+              <div class="form-group col-xs-3" style="padding-left: 0px;"> <input type="time" class="form-control" id="time"  placeholder="Enter time"  required /> </div>
+              <div class="form-group col-xs-2"> <button type="submit" class="btn btn-info btn-fill">Get Results</button> </div>
+          </form>
+
+
                           <table class="table table-hover table-striped">
                                 <thead>
                                     <tr>
@@ -27,10 +35,18 @@
             <div class="col-md-12">
                 <div class="card card-plain">
                     <div class="header">
-                        <h4 class="title">Table on Plain Background</h4>
-                        <p class="category">Here is a subtitle for this table</p>
+                        <h4 class="title"> Check congestion rate for upcoming trip</h4>
+                        <p class="category">Congestioon rate on each streetZ</p>
                     </div>
                     <div class="content table-responsive table-full-width">
+
+                          <form ngNativeValidate class="" (ngSubmit)="submitCFForm(futureCongestionForm)" #futureCongestionForm="ngForm">
+              <div class="form-group col-xs-3" style="padding-left: 0px;"> <input type="text" class="form-control" id="sourceF"  placeholder="Enter source" required /> </div>
+              <div class="form-group col-xs-3" style="padding-left: 0px;"> <input type="text" class="form-control" id="destinationF" placeholder="Enter destination" #destination name="destination"  required /> </div>
+              <div class="form-group col-xs-3" style="padding-left: 0px;"> <input type="text" class="form-control" id="day" placeholder="Enter day" name="day" required /> </div>
+              <div class="form-group col-xs-3" style="padding-left: 0px;"> <input type="time" class="form-control" id="timeP" placeholder="Enter time"  required /> </div>
+              <div class="form-group col-xs-2"> <button type="submit" class="btn btn-info btn-fill">Get Results</button> </div>
+            </form>
                         <table class="table table-hover">
                             <thead>
                                 <tr>
