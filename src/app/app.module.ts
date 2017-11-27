@@ -20,6 +20,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserInputService } from './maps/user-input.service';
 import { UserService } from './landing-page/user.service';
+import { HomeGraphService } from './home/home-graph.service';
 import { AuthGuard } from './auth.guard';
 import { NvD3Module } from 'ng2-nvd3';
 
@@ -45,7 +46,7 @@ import { NvD3Module } from 'ng2-nvd3';
     AppRoutingModule,
     NvD3Module
   ],
-  providers: [UserInputService, UserService, AuthGuard],
+  providers: [UserInputService, UserService, HomeGraphService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
