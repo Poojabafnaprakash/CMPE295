@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserInputForPresent } from './model/userInputForPresent';
+import { UserInputForFuture } from './model/userInputForFuture';
 import { UserInput } from './model/userInput';
+import { TablesService } from './tables.services';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 
@@ -17,38 +19,72 @@ declare interface TableData {
 export class TablesComponent implements OnInit {
     public tableData1: TableData;
     public tableData2: TableData;
+    public testData:any;
+    public tableDataFlag:boolean = false;
+    public tableDataFFlag:boolean = false;
+    public userInputData : UserInputForPresent;
+    public userInputDataF : UserInputForFuture;
 
-  constructor() { }
+  constructor(private tablesService:TablesService) { }
 
   ngOnInit() {
-      this.tableData1 = {
-          headerRow: [ 'S.No.', 'Street Name', 'Direction', 'Congestion Rate', 'Expected Time Delay'],
-          dataRows: [
-              ['1', 'Dakota Rice', 'Niger', 'Oud-Turnhout', '$36,738'],
-              ['2', 'Minerva Hooper', 'Curaçao', 'Sinaai-Waas', '$23,789'],
-              ['3', 'Sage Rodriguez', 'Netherlands', 'Baileux', '$56,142'],
-              ['4', 'Philip Chaney', 'Korea, South', 'Overland Park', '$38,735'],
-              ['5', 'Doris Greene', 'Malawi', 'Feldkirchen in Kärnten', '$63,542'],
-              ['6', 'Mason Porter', 'Chile', 'Gloucester', '$78,615']
-          ]
+    this.userInputData = new UserInputForPresent('', '', '');
+    this.userInputDataF = new UserInputForFuture('', '', '','');
+}
+
+getCongestionDetailValue () {
+  var obj = {
+     "source": this.userInputData.source,
+     "destination": this.userInputData.destination,
+     "time" : this.userInputData.time
+   }
+   
+  this.tablesService.congestionDetailPresent(obj).subscribe((data) => {
+    if(data != undefined && data != '') {
+     console.log('inside final data********');
+     console.log(data);
+     this.tableData1 = {
+        headerRow: [ 'S.No.', 'Street Name', 'Direction', 'Congestion Rate', 'Expected Time Delay'],
+        dataRows: data
       };
-      this.tableData2 = {
-          headerRow: [ 'S.No.', 'Street Name', 'Direction', 'Congestion Rate', 'Expected Time Delay'],
-          dataRows: [
-              ['1', 'Dakota Rice','$36,738', 'Niger', 'Oud-Turnhout' ],
-              ['2', 'Minerva Hooper', '$23,789', 'Curaçao', 'Sinaai-Waas'],
-              ['3', 'Sage Rodriguez', '$56,142', 'Netherlands', 'Baileux' ],
-              ['4', 'Philip Chaney', '$38,735', 'Korea, South', 'Overland Park' ],
-              ['5', 'Doris Greene', '$63,542', 'Malawi', 'Feldkirchen in Kärnten', ],
-              ['6', 'Mason Porter', '$78,615', 'Chile', 'Gloucester' ]
-          ]
-      };
+      this.tableDataFlag = true;
+    }
+  })
 
 }
 
 
+getCongestionDetailValueForFuture () {
+  var obj = {
+     "source": this.userInputDataF.source,
+     "destination": this.userInputDataF.destination,
+     "day": this.userInputDataF.day,
+     "time" : this.userInputDataF.time
+   }
+   
+    this.tablesService.congestionDetailFuture(obj).subscribe((data) => {
+    if(data != undefined && data != '') {
+     console.log('inside final data********');
+     console.log(data);
+     this.tableData2 = {
+          headerRow: [ 'S.No.', 'Street Name', 'Direction', 'Congestion Rate', 'Expected Time Delay'],
+          dataRows: data
+      };
+      this.tableDataFFlag = true;
+    }
+  })
+}
+
   submitCPForm(presentCongestionForm: NgForm) {
     console.log("write the post request");
+    console.log(this.userInputData.source);
+    this.getCongestionDetailValue();
+  }
+
+  submitCFForm(futureCongestionForm: NgForm) {
+    console.log("write the post request");
+    console.log(this.userInputDataF.source);
+    this.getCongestionDetailValueForFuture();
   }
 
 }

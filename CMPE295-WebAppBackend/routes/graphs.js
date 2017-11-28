@@ -62,6 +62,7 @@ exports.setRouteTavelTime = function (req, res) {
 
 };
 
+
 exports.setRouteCongestionRate = function (req, res) {
 
   makeBody(req).then(function(resultBody){

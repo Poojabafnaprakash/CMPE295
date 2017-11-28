@@ -23,6 +23,7 @@ import { UserService } from './landing-page/user.service';
 import { HomeGraphService } from './home/home-graph.service';
 import { AuthGuard } from './auth.guard';
 import { NvD3Module } from 'ng2-nvd3';
+import { TablesService } from './tables/tables.services'
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { NvD3Module } from 'ng2-nvd3';
     AppRoutingModule,
     NvD3Module
   ],
-  providers: [UserInputService, UserService, HomeGraphService, AuthGuard],
+  providers: [UserInputService, UserService, HomeGraphService, AuthGuard, TablesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
