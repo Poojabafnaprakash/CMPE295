@@ -44,7 +44,7 @@ getCongestionDetailValue () {
      console.log('inside final data********');
      console.log(data);
      this.tableData1 = {
-        headerRow: [ 'S.No.', 'Street Name', 'Direction', 'Congestion Rate', 'Expected Time Delay'],
+        headerRow: [ 'S.No.', 'Street Name', 'Direction', 'Congestion Rate'],
         dataRows: data
       };
       this.tableDataFlag = true;
@@ -67,7 +67,7 @@ getCongestionDetailValueForFuture () {
      console.log('inside final data********');
      console.log(data);
      this.tableData2 = {
-          headerRow: [ 'S.No.', 'Street Name', 'Direction', 'Congestion Rate', 'Expected Time Delay'],
+          headerRow: [ 'S.No.', 'Street Name', 'Direction', 'Congestion Rate'],
           dataRows: data
       };
       this.tableDataFFlag = true;
