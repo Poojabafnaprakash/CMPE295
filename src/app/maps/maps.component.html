@@ -8,9 +8,9 @@
         <div class="form-group">
           <h5>Enter destination:</h5> <input type="text" class="form-control" id="destination" placeholder="Enter destination" #destination [(ngModel)]="userInput.destination" name="destination" required /> </div>
         <div class="form-group">
-          <h5>Enter day:</h5> <input type="text" class="form-control" id="day" placeholder="Enter day" #dayOfWeek [(ngModel)]="userInput.day" name="day" required /> </div>
+          <h5>Enter day:</h5> <input type="text" class="form-control" id="day" placeholder="Enter day" #dayOfWeek [(ngModel)]="userInput.dayOfWeek" name="day" required /> </div>
         <div class="form-group">
-          <h5>Enter time:</h5> <input type="text" class="form-control" id="time" placeholder="Enter time(hh:mm:ss)" #timeOfDay [(ngModel)]="userInput.time" name="time" required /> </div> <button (click)="setFav(source.value, destination.value, dayOfWeek.value, timeOfDay.value)"
+          <h5>Enter time:</h5> <input type="text" class="form-control" id="time" placeholder="Enter time(hh:mm:ss)" #timeOfDay [(ngModel)]="userInput.timeOfDay" name="time" required /> </div> <button (click)="setFav(source.value, destination.value, dayOfWeek.value, timeOfDay.value)"
           type="button" class="btn btn-warning btn-fill">
           <span class="glyphicon glyphicon-heart"></span>Add Favorite
         </button> <button type="submit" class="btn btn-info btn-fill">Get Results</button> </form>

@@ -23,7 +23,8 @@
             <h4 class="title">Congestion Rate</h4>
             <form ngNativeValidate class="" (ngSubmit)="getRouteCongestionRate(routeCongestionTimeForm)" #routeCongestionTimeForm="ngForm">
               <div class="form-group col-xs-3" style="padding-left: 0px;"> <input type="text" class="form-control" id="source" placeholder="Source" #source [(ngModel)]="routeGraphCongestionRate.source" name="source" required /> </div>
-              <div class="form-group col-xs-4" style="padding-left: 0px;"> <input type="text" class="form-control" id="destination" placeholder="Destination" #destination [(ngModel)]="routeGraphCongestionRate.destination" name="destination" required /> </div>
+              <div class="form-group col-xs-3" style="padding-left: 0px;"> <input type="text" class="form-control" id="destination" placeholder="Destination" #destination [(ngModel)]="routeGraphCongestionRate.destination" name="destination" required /> </div>
+              <div class="form-group col-xs-2" style="padding-left: 0px;"> <input type="text" class="form-control" id="time" placeholder="Time" #destination [(ngModel)]="routeGraphCongestionRate.timeOfDay" name="timeOfDay" required /> </div>
               <div class="form-group col-xs-2" style="padding-left: 0px;"> <input type="text" class="form-control" id="dayOfWeek" placeholder="Day" #destination [(ngModel)]="routeGraphCongestionRate.dayOfWeek" name="dayOfWeek" required /> </div>
               <div class="form-group col-xs-2"> <button type="submit" class="btn btn-info btn-fill">Get Results</button> </div>
             </form>

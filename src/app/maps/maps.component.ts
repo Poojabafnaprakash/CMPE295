@@ -25,7 +25,7 @@ export class MapsComponent implements OnInit {
   userInput: UserInput;
   statusCode: number;
   predictionResult: PredictedResults;
-  latlngResponse: LatLng;
+  latLngResponse: LatLng;
   showCongestionRateTable: boolean = false;
 
   constructor(private userInputService: UserInputService) { }
@@ -51,7 +51,6 @@ export class MapsComponent implements OnInit {
       avoidHighways: false,
       travelMode: google.maps.TravelMode.DRIVING
     }, function(response, status) {
-      console.log(response.routes);
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
       } else {
@@ -74,7 +73,7 @@ export class MapsComponent implements OnInit {
     //getLatLng
     this.userInputService.getLatLng(this.userInput)
       .subscribe(successCode => {
-        this.latlngResponse = successCode;
+        this.latLngResponse = successCode;
       },
       errorCode => this.statusCode = errorCode);
 
@@ -83,9 +82,8 @@ export class MapsComponent implements OnInit {
       .subscribe(successCode => {
         this.predictionResult = successCode;
         this.showCongestionRateTable = true;
-        console.log(this.latlngResponse);
-        var pointA = new google.maps.LatLng(this.latlngResponse.srcLat, this.latlngResponse.srcLng),
-          pointB = new google.maps.LatLng(this.latlngResponse.dstLat, this.latlngResponse.dstLng);
+          var pointA = new google.maps.LatLng(this.latLngResponse.srcLat, this.latLngResponse.srcLng),
+          pointB = new google.maps.LatLng(this.latLngResponse.dstLat, this.latLngResponse.dstLng);
         const myOptions = {
           zoom: 7,
           center: pointA
@@ -112,15 +110,40 @@ export class MapsComponent implements OnInit {
         // get route from A to B
         this.calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB);
 
-        //plot infowindow for all routes CongestionRate
-        for (var i = 0; i < this.latlngResponse.latLngSteps.length; i++) {
-          console.log(this.latlngResponse.latLngSteps[i]);
-          var infowindow = new google.maps.InfoWindow({
-            content: this.predictionResult[i].StreetName + ' : ' + this.predictionResult[i].CongestionRate,
-            map: map,
-            position: new google.maps.LatLng(this.latlngResponse.latLngSteps[i].lat, this.latlngResponse.latLngSteps[i].lng)
-          });
-        }
+        // plot infowindow for all routes CongestionRate
+        // for (var i = 0; i < this.latLngResponse.latLngSteps.length; i++) {
+        //   console.log(this.latLngResponse.latLngSteps[i]);
+        //   var infowindow = new google.maps.InfoWindow({
+        //     content: this.predictionResult[i].StreetName + ' : ' + this.predictionResult[i].CongestionRate,
+        //     map: map,
+        //     position: new google.maps.LatLng(this.latLngResponse.latLngSteps[i].lat, this.latLngResponse.latLngSteps[i].lng)
+        //   });
+        // }
+
+          for (var i = 1; i < this.latLngResponse.latLngSteps.length; i++) {
+            var pathMarker = new google.maps.Marker({
+              position: new google.maps.LatLng(this.latLngResponse.latLngSteps[i].lat, this.latLngResponse.latLngSteps[i].lng),
+              map: map,
+              opacity: 0.6,
+              icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+            });
+
+            var infowindow = new google.maps.InfoWindow({
+              content: this.latLngResponse.latLngSteps[i].html_instructions
+            });
+
+
+            (function(infowindow) {
+              google.maps.event.addListener(pathMarker, 'mouseover', function() {
+                infowindow.open(map, this);
+              });
+
+              google.maps.event.addListener(pathMarker, 'mouseout', function() {
+                infowindow.close();
+              });
+            })(infowindow);
+
+          }
 
         var trafficLayer = new google.maps.TrafficLayer();
         trafficLayer.setMap(map);

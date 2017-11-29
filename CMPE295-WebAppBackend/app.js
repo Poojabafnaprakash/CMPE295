@@ -46,7 +46,7 @@ app.get('/distance', directionsAPI.directions);
 app.get('/time', directionsAPI.totalTime);
 
 app.use('/api/cronJob', directionsAPI.cronJob);
-app.post('/api/userInput', directionsAPI.userInput);
+// app.post('/api/userInput', directionsAPI.userInput);
 app.post('/api/latlng', directionsAPI.latLng);
 app.post('/api/checklogin', login.checkLogin);
 app.post('/api/register', login.register);
@@ -57,6 +57,7 @@ app.post('/api/routeTavelTime', graphs.setRouteTavelTime);
 app.post('/api/routeCongestionRate', graphs.setRouteCongestionRate);
 app.post('/api/routeCongestionDetails', table.getRouteCongestionDetails);
 app.post('/api/routeCongestionDetailF', table.getRouteCongestionDetailF);
+app.post('/api/userInput', directionsAPI.getDashboardCongestionRate);
 
 http.createServer(app).listen(app.get('port'), "0.0.0.0", function () {
     console.log('Express server listening on port ' + app.get('port'));
