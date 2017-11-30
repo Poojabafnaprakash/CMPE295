@@ -23,8 +23,9 @@ import { UserService } from './landing-page/user.service';
 import { HomeGraphService } from './home/home-graph.service';
 import { AuthGuard } from './auth.guard';
 import { NvD3Module } from 'ng2-nvd3';
-import { TablesService } from './tables/tables.services'
 import { UserUpdateService } from './user/user.services'
+import { TablesService } from './tables/tables.services';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,13 @@ import { UserUpdateService } from './user/user.services'
     SidebarModule,
     RouterModule,
     AppRoutingModule,
-    NvD3Module
+    NvD3Module,
+    NgCircleProgressModule.forRoot({
+      "radius": 60,
+      "outerStrokeWidth": 10,
+      "innerStrokeWidth": 5,
+      "showBackground": false
+    })
   ],
   providers: [UserInputService, UserService, UserUpdateService, HomeGraphService, AuthGuard, TablesService],
   bootstrap: [AppComponent]

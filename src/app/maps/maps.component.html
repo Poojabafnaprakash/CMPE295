@@ -65,6 +65,18 @@
           <span class="glyphicon glyphicon-heart"></span>Add Favorite
         </button>
         <button type="submit" class="btn btn-info btn-fill">Get Results</button>
+        <div *ngIf="showProgress" style="margin:25%">
+          <circle-progress
+            [percent]="95"
+            [radius]="50"
+            [outerStrokeWidth]="16"
+            [innerStrokeWidth]="8"
+            [outerStrokeColor]="green"
+            [innerStrokeColor]="blue"
+            [animation]="true"
+            [animationDuration]="900"
+          ></circle-progress>
+        </div>
       </form>
       <h5>
         <table class="table" *ngIf="showCongestionRateTable">

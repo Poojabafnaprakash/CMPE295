@@ -27,9 +27,9 @@ export class MapsComponent implements OnInit {
   predictionResult: PredictedResults;
   latLngResponse: LatLng;
   showCongestionRateTable: boolean = false;
-  testFilter:any;
   sources:any;
   destinations:any;
+  showProgress:boolean = false;
 
   constructor(private userInputService: UserInputService) { }
 
@@ -45,7 +45,6 @@ export class MapsComponent implements OnInit {
 
     this.userInput = new UserInput(1, "", "", "", "");
 
-    this.testFilter = "hi";
     this.sources = ["Casa Verde Street ", "Alum Rock Park", "San Jose State University", "Avaya Stadium", "DMV San Jose", "MapR Technologies, 350 Holger Way", "Winchester Mystery House", "N 1st Street ", "Santana Row", "Costco Wholesale, 1709 Automation Pkwy, San Jose, CA 95131", "Downtown San Jose", "1302,The Alameda", "Mineta San Jose International Airport"];
     this.destinations = [""];
   }
@@ -111,6 +110,7 @@ export class MapsComponent implements OnInit {
 
   onSubmit(userInputForm: NgForm) {
     console.log(this.userInput);
+    this.showProgress = true;
     this.statusCode = null;
     //getLatLng
     this.userInputService.getLatLng(this.userInput)
@@ -122,6 +122,7 @@ export class MapsComponent implements OnInit {
     //get predictionResult
     this.userInputService.create(this.userInput)
       .subscribe(successCode => {
+        this.showProgress = false;
         this.predictionResult = successCode;
         this.showCongestionRateTable = true;
           var pointA = new google.maps.LatLng(this.latLngResponse.srcLat, this.latLngResponse.srcLng),
