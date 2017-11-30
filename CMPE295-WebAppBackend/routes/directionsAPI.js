@@ -50,9 +50,21 @@ exports.latLng = function (req, res) {
         if (!err) {
             var json_responses = {};
             var stepsLatLng = [];
+            var stepsObj = {};
             stepsLatLng.push(response.json.routes[0].legs[0].steps[0].start_location);
             for (var key in response.json.routes[0].legs[0].steps) {
-                stepsLatLng.push(response.json.routes[0].legs[0].steps[key].end_location);
+              var regex = /<b>\s*(.*?)\s*<\/b>/g;
+              while (m = regex.exec(response.json.routes[0].legs[0].steps[key].html_instructions)) {
+                var match = m[0];
+              }
+              stepsObj = {
+                "lat": response.json.routes[0].legs[0].steps[key].end_location.lat,
+                "lng": response.json.routes[0].legs[0].steps[key].end_location.lng,
+                "html_instructions": match
+              };
+              stepsLatLng.push(stepsObj);
+
+                // stepsLatLng.push(response.json.routes[0].legs[0].steps[key].end_location);
             }
             json_responses = {
                 "srcLat": response.json.routes[0].legs[0].start_location.lat,
@@ -61,6 +73,7 @@ exports.latLng = function (req, res) {
                 "dstLng": response.json.routes[0].legs[0].end_location.lng,
                 "latLngSteps": stepsLatLng
             }
+            console.log(json_responses);
             res.send(json_responses);
         }
     });
@@ -121,8 +134,8 @@ let getSteps = function (req) {
                         {"Start": response.json.routes[0].legs[0].start_address},
                         {"End": response.json.routes[0].legs[0].end_address},
                         {"Time": response.json.routes[0].legs[0].duration.text},
-                        {"Start Time": req.param("time")},
-                        {"Day": req.param("day")}
+                        {"Start Time": req.param("timeOfDay")},
+                        {"Day": req.param("dayOfWeek")}
                     ],
                     "steps": finalSteps
                 }
@@ -141,14 +154,14 @@ let getCongestion = function (getStepsResult) {
             data: getStepsResult,
             headers: {"Content-Type": "application/json"}
         };
-        client.post("http://130.65.159.197:5000/getCongestion", args, function (data, response) {
+        client.post("http://130.65.159.175:5000/getCongestion", args, function (data, response) {
             resolve(data);
         });
 //		client.post("http://130.65.159.197:5000/traffic", args, function (data, response) {
 //		    resolve(data);
-//		}); 
+//		});
 //		resolve([{"CongestionRate": "65%",
-//				   "StreetName": "W Julian St"}, 
+//				   "StreetName": "W Julian St"},
 //				   {"CongestionRate": "34%",
 //					   "StreetName": "N 7th St"},
 //					   {"CongestionRate": "53",
@@ -385,12 +398,12 @@ exports.cronJob = function (req, res) {
 ////	    	obj['src'] = arr[i];
 ////			obj['dst'] = arr[j];
 ////			listOfObjects.push(obj);
-////		}	
+////		}
 ////		console.log(Object.keys(listOfObjects).length);
 ////	}
 //	listOfObjects = [{ "src": "Casa Verde Street", "dst": "San Jose State Univerisity"},{ "src": "San Jose State Univerisity","dst": "Casa Verde Street"}];
 //	var promises = [];
-//	listOfObjects.forEach(function (arrayItem) {	   
+//	listOfObjects.forEach(function (arrayItem) {
 //		var cronJobObj = {};
 //		//console.log(arrayItem);
 //		promises.push(
@@ -401,7 +414,7 @@ exports.cronJob = function (req, res) {
 //		}).asPromise()
 //		  .then((response) => {
 //			var today = new Date();
-//				
+//
 //			cronJobObj['Source'] = arrayItem.src + ', San Jose, CA';
 //			cronJobObj['Destination'] = arrayItem.dst + ', San Jose, CA';
 //			cronJobObj['Date'] = today.getMonth() + "/"
@@ -415,9 +428,9 @@ exports.cronJob = function (req, res) {
 //		  })
 //		  .catch((err) => {
 //		    console.log(arrayItem.src + " " + arrayItem.dst+ " " +err);
-//		  }));		
+//		  }));
 //	});
-//	
+//
 //	Promise.all(promises).then(function() {
 //		fs.writeFile("./output.txt", JSON.stringify(responseObj), function(err) {
 //		    if(err) {
@@ -425,9 +438,51 @@ exports.cronJob = function (req, res) {
 //		    }
 //
 //		    console.log("The file was saved!");
-//		}); 
-//		res.send(responseObj); 
+//		});
+//		res.send(responseObj);
 //	}, function(err) {
 //		console.log(err);
-//	});	
+//	});
 //}
+
+exports.getDashboardCongestionRate = function (req, res) {
+
+  // var reqBody = {
+  //   "Source": req.body.source,
+  //   "Destination": req.body.destination,
+  //   "Day": req.body.dayOfWeek,
+  //   "Time": req.body.timeOfDay
+  // };
+  //
+  // var args = {
+  //   data: reqBody,
+  //   headers: {"Content-Type": "application/json"}
+  // };
+  //
+  // client.post("http://130.65.159.175:5000/getCongestion", args, function (data, response) {
+  //   res.send(data);
+  // });
+
+  func(function(){
+    var reqBody = {
+      "Source": req.body.source,
+      "Destination": req.body.destination,
+      "Day": req.body.dayOfWeek,
+      "Time": req.body.timeOfDay
+    };
+
+    var args = {
+      data: reqBody,
+      headers: {"Content-Type": "application/json"}
+    };
+    client.post("http://130.65.159.175:5000/getCongestion", args, function (data, response) {
+      res.send(data);
+    });
+  })
+};
+
+function func(callback){
+  setTimeout(callback, 900);
+}
+
+

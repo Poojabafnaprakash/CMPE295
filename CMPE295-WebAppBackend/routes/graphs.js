@@ -6,7 +6,8 @@ var makeBody = function(req) {
     var reqBody = {
       "Source": req.body.source,
       "Destination": req.body.destination,
-      "Day": req.body.dayOfWeek
+      "Day": req.body.dayOfWeek,
+      "Time": req.body.timeOfDay
     };
     resolve(reqBody);
   });

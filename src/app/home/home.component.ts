@@ -30,8 +30,8 @@ export class HomeComponent implements OnInit {
   constructor(private homeGraphService: HomeGraphService) { }
 
   ngOnInit() {
-    this.routeGraphTravelTime = new RouteGraph("", "", "");
-    this.routeGraphCongestionRate = new RouteGraph("", "", "");
+    this.routeGraphTravelTime = new RouteGraph("", "", "", "");
+    this.routeGraphCongestionRate = new RouteGraph("", "", "", "");
 
     //second graph
     // this.options2 = {
