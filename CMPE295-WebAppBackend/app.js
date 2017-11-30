@@ -13,6 +13,7 @@ var express = require('express')
     , favorite = require("./routes/favorite")
     , graphs = require("./routes/graphs")
     , user = require('./routes/user')
+    , update = require('./routes/update')
     , table = require('./routes/table');
 
 var app = express();
@@ -53,6 +54,7 @@ app.post('/api/register', login.register);
 app.get('/api/homepage', login.redirectToHomepage);
 app.post('/api/logout', login.logout);
 app.post('/api/setFavorite', favorite.setFavorite);
+app.post('/api/updateProfile', update.updateProfile);
 app.post('/api/routeTavelTime', graphs.setRouteTavelTime);
 app.post('/api/routeCongestionRate', graphs.setRouteCongestionRate);
 app.post('/api/routeCongestionDetails', table.getRouteCongestionDetails);

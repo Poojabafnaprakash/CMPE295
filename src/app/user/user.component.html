@@ -6,39 +6,39 @@
           <div class="header">
             <h4 class="title">Edit Profile</h4> </div>
           <div class="content">
-            <form>
+            <form ngNativeValidate class="margin-input" (ngSubmit)="updateProfile(userInputForm)" #userInputForm="ngForm">
               <div class="row">
                 <div class="col-md-6">
-                  <div class="form-group"> <label for="exampleInputEmail1">Email ID</label> <input type="email" class="form-control" placeholder="Email"> </div>
+                  <div class="form-group"> <label for="exampleInputEmail1">Email ID</label> <input #email type="email" class="form-control" [(ngModel)]="userInput.email" name="email" placeholder="Email"> </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-group"> <label>Phone</label> <input type="text" class="form-control" placeholder="Phone"> </div>
+                  <div class="form-group"> <label>Phone</label> <input type="text" class="form-control" #phone placeholder="Phone" [(ngModel)]="userInput.phone" name="phone"> </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6">
-                  <div class="form-group"> <label>First Name</label> <input type="text" class="form-control" placeholder="First Name"> </div>
+                  <div class="form-group"> <label>First Name</label> <input type="text" class="form-control" #firstname placeholder="First Name" [(ngModel)]="userInput.firstName" name="firstName"> </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-group"> <label>Last Name</label> <input type="text" class="form-control" placeholder="Last Name"> </div>
+                  <div class="form-group"> <label>Last Name</label> <input type="text" class="form-control" #lastname placeholder="Last Name" [(ngModel)]="userInput.lastName" name="lastName"> </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group"> <label>Address</label> <input type="text" class="form-control" placeholder="Address"> </div>
+                  <div class="form-group"> <label>Address</label> <input type="text" class="form-control" #address placeholder="Address" [(ngModel)]="userInput.address" name="address"> </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-4">
-                  <div class="form-group"> <label>City</label> <input type="text" class="form-control" placeholder="City"> </div>
+                  <div class="form-group"> <label>City</label> <input type="text" class="form-control" #city placeholder="City" [(ngModel)]="userInput.city" name="city"> </div>
                 </div>
                 <div class="col-md-4">
-                  <div class="form-group"> <label>Country</label> <input type="text" class="form-control" placeholder="Country"> </div>
+                  <div class="form-group"> <label>Country</label> <input type="text" class="form-control" #country placeholder="Country" [(ngModel)]="userInput.country" name="country"> </div>
                 </div>
                 <div class="col-md-4">
-                  <div class="form-group"> <label>Postal Code</label> <input type="number" class="form-control" placeholder="ZIP Code"> </div>
+                  <div class="form-group"> <label>Postal Code</label> <input type="number" class="form-control" #postal placeholder="ZIP Code" [(ngModel)]="userInput.postal" name="postal"> </div>
                 </div>
-              </div> <button type="submit" class="btn btn-info btn-fill pull-right">Update Profile</button>
+              </div> <button type="submit"  class="btn btn-info btn-fill pull-right">Update Profile</button>
               <div class="clearfix"></div>
             </form>
           </div>
