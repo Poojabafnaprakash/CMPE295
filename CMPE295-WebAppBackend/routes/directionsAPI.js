@@ -475,7 +475,7 @@ exports.getDashboardCongestionRate = function (req, res) {
       data: reqBody,
       headers: {"Content-Type": "application/json"}
     };
-    client.post("http://130.65.159.175:5000/getCongestion", args, function (data, response) {
+    client.post("http://130.65.159.197:5000/getCongestion", args, function (data, response) {
       res.send(data);
     });
   })
