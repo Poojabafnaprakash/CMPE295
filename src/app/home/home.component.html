@@ -1,4 +1,4 @@
-<div class="main-content">
+<div class="main-content" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
   <div class="container-fluid">
     <div class="card">
       <div class="header">
@@ -6,45 +6,105 @@
         <p class="category"></p>
       </div>
       <div class="card">
-        <div class="col-md-6 well" style="border: 19px solid #e3e3e3;">
+        <div class="col-md-12 well" style="border: 19px solid #e3e3e3;">
           <div class="header">
             <h4 class="title">Travel Time</h4>
             <form ngNativeValidate class="" (ngSubmit)="getRouteTavelTime(routeTavelTimeForm)" #routeTavelTimeForm="ngForm">
-              <div class="form-group col-xs-3" style="padding-left: 0px;"> <input type="text" class="form-control" id="source" placeholder="Source" #source [(ngModel)]="routeGraphTravelTime.source" name="source" required /> </div>
-              <div class="form-group col-xs-4" style="padding-left: 0px;"> <input type="text" class="form-control" id="destination" placeholder="Destination" #destination [(ngModel)]="routeGraphTravelTime.destination" name="destination" required /> </div>
-              <div class="form-group col-xs-2" style="padding-left: 0px;"> <input type="text" class="form-control" id="dayOfWeek" placeholder="Day" #destination [(ngModel)]="routeGraphTravelTime.dayOfWeek" name="dayOfWeek" required /> </div>
+              <div class="form-group col-xs-3" style="padding-left: 0px;">
+                <select type="text" class="form-control" id="source" placeholder="Source" #source [(ngModel)]="routeGraphTravelTime.source" name="source" (ngModelChange)="modelChangedRouteTravelTime($event)" required>
+                  <option value="" selected disabled>Enter source</option>
+                  <option *ngFor="let source of sourcesRouteTravelTime"> {{source}}</option>
+                </select>
+              </div>
+              <div class="form-group col-xs-4" style="padding-left: 0px;">
+                <select type="text" class="form-control" id="destination" placeholder="Destination" #destination [(ngModel)]="routeGraphTravelTime.destination" name="destination" required>
+                  <option value="" selected disabled>Enter destination</option>
+                  <option *ngFor="let destination of destinationsRouteTravelTime"> {{destination}} </option>
+                </select>
+              </div>
+              <div class="form-group col-xs-2" style="padding-left: 0px;">
+                <select type="text" class="form-control" id="dayOfWeek" placeholder="Day" #destination [(ngModel)]="routeGraphTravelTime.dayOfWeek" name="dayOfWeek" required>
+                  <option value="" selected disabled>Enter day</option>
+                  <option>Monday</option>
+                  <option>Tuesday</option>
+                  <option>Wednesday</option>
+                  <option>Thursday</option>
+                  <option>Friday</option>
+                  <option>Saturday</option>
+                  <option>Sunday</option>
+                </select>
+              </div>
               <div class="form-group col-xs-2"> <button type="submit" class="btn btn-info btn-fill">Get Results</button> </div>
             </form>
           </div>
           <nvd3 [options]="options" [data]="data"></nvd3>
         </div>
-        <div class="col-md-6 well" style="border: 19px solid #e3e3e3;">
+        <div class="col-md-12 well" style="border: 19px solid #e3e3e3;">
           <div class="header">
             <h4 class="title">Congestion Rate</h4>
             <form ngNativeValidate class="" (ngSubmit)="getRouteCongestionRate(routeCongestionTimeForm)" #routeCongestionTimeForm="ngForm">
-              <div class="form-group col-xs-3" style="padding-left: 0px;"> <input type="text" class="form-control" id="source" placeholder="Source" #source [(ngModel)]="routeGraphCongestionRate.source" name="source" required /> </div>
-              <div class="form-group col-xs-3" style="padding-left: 0px;"> <input type="text" class="form-control" id="destination" placeholder="Destination" #destination [(ngModel)]="routeGraphCongestionRate.destination" name="destination" required /> </div>
-              <div class="form-group col-xs-2" style="padding-left: 0px;"> <input type="text" class="form-control" id="time" placeholder="Time" #destination [(ngModel)]="routeGraphCongestionRate.timeOfDay" name="timeOfDay" required /> </div>
-              <div class="form-group col-xs-2" style="padding-left: 0px;"> <input type="text" class="form-control" id="dayOfWeek" placeholder="Day" #destination [(ngModel)]="routeGraphCongestionRate.dayOfWeek" name="dayOfWeek" required /> </div>
+              <div class="form-group col-xs-3" style="padding-left: 0px;">
+                <select type="text" class="form-control" id="source" placeholder="Source" #source [(ngModel)]="routeGraphCongestionRate.source" name="source" (ngModelChange)="modelChangedRouteCongestionRate($event)" required>
+                  <option value="" selected disabled>Enter source</option>
+                  <option *ngFor="let source of sourcesRouteCongestionRate"> {{source}}</option>
+                </select>
+              </div>
+              <div class="form-group col-xs-4" style="padding-left: 0px;">
+                <select type="text" class="form-control" id="destination" placeholder="Destination" #destination [(ngModel)]="routeGraphCongestionRate.destination" name="destination" required>
+                  <option value="" selected disabled>Enter destination</option>
+                  <option *ngFor="let destination of destinationsRouteCongestionRate"> {{destination}} </option>
+                </select>
+              </div>
+              <div class="form-group col-xs-2" style="padding-left: 0px;">
+                <select type="text" class="form-control" id="dayOfWeek" placeholder="Day" #destination [(ngModel)]="routeGraphCongestionRate.dayOfWeek" name="dayOfWeek" required>
+                  <option value="" selected disabled>Enter day</option>
+                  <option>Monday</option>
+                  <option>Tuesday</option>
+                  <option>Wednesday</option>
+                  <option>Thursday</option>
+                  <option>Friday</option>
+                  <option>Saturday</option>
+                  <option>Sunday</option>
+                </select>
+              </div>
               <div class="form-group col-xs-2"> <button type="submit" class="btn btn-info btn-fill">Get Results</button> </div>
             </form>
           </div>
           <nvd3 [options]="options2" [data]="data2"></nvd3>
         </div>
       </div>
-      <div class="col-md-6 well" style="border: 19px solid #e3e3e3;">
+      <div class="col-md-12 well" style="border: 19px solid #e3e3e3;">
         <div class="header">
-          <h4 class="title">Interstate Congestion Rate</h4> <br />
-          <p class="category"></p>
+          <h4 class="title">Street Congestion Rate</h4> <br />
+          <form ngNativeValidate class="" (ngSubmit)="getStreetCongestionRate(streetCongestionRateForm)" #streetCongestionRateForm="ngForm">
+            <div class="form-group col-xs-3" style="padding-left: 0px;">
+              <select type="text" class="form-control" id="street" placeholder="Street" #street [(ngModel)]="routeGraphStreetCongestionRate.street" name="street" (ngModelChange)="modelChangedStreetCongestionRate($event)" required>
+                <option value="" selected disabled>Enter street</option>
+                <option *ngFor="let street of streetsCongestionRate"> {{street}}</option>
+              </select>
+            </div>
+            <div class="form-group col-xs-4" style="padding-left: 0px;">
+              <select type="text" class="form-control" id="direction" placeholder="Destination" #destination [(ngModel)]="routeGraphStreetCongestionRate.direction" name="direction" required>
+                <option value="" selected disabled>Enter direction</option>
+                <option *ngFor="let direction of directionsCongestionRate"> {{direction}} </option>
+              </select>
+            </div>
+            <div class="form-group col-xs-2" style="padding-left: 0px;">
+              <select type="text" class="form-control" id="dayOfWeek" placeholder="Day" #destination [(ngModel)]="routeGraphStreetCongestionRate.dayOfWeek" name="dayOfWeek" required>
+                <option value="" selected disabled>Enter day</option>
+                <option>Monday</option>
+                <option>Tuesday</option>
+                <option>Wednesday</option>
+                <option>Thursday</option>
+                <option>Friday</option>
+                <option>Saturday</option>
+                <option>Sunday</option>
+              </select>
+            </div>
+            <div class="form-group col-xs-2"> <button type="submit" class="btn btn-info btn-fill">Get Results</button> </div>
+          </form>
         </div>
-        <nvd3 [options]="options" [data]="data"></nvd3>
-      </div>
-      <div class="col-md-6 well" style="border: 19px solid #e3e3e3;">
-        <div class="header">
-          <h4 class="title">Travel history</h4> <br />
-          <p class="category"></p>
-        </div>
-        <nvd3 [options]="options" [data]="data"></nvd3>
+        <nvd3 [options]="options3" [data]="data3"></nvd3>
       </div>
     </div>
   </div>

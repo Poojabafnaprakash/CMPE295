@@ -26,6 +26,14 @@ export class HomeGraphService {
       .catch(this.handleError);
   }
 
+  streetCongestionTimeMethod(routeStreetCongestionRate: RouteGraph): Observable<GraphData[]> {
+    let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: cpHeaders });
+    return this.http.post('/api/congestionPerStreet', routeStreetCongestionRate, options)
+      .map(success => success.json())
+      .catch(this.handleError);
+  }
+
   private handleError(error: Response | any) {
     return Observable.throw(error.status);
   }
