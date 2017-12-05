@@ -22,7 +22,7 @@ var getRouteTravelTime = function(getReqBody) {
     // client.post("http://130.65.159.175:5000/getTravelTimeVsTime", args, function (data, response) {
     //   resolve(data);
     // });
-    client.post("http://130.65.159.197:5000/getTravelTimeVsTime", args, function (data, response) {
+    client.post("http://130.65.159.175:5000/getTravelTimeVsTime", args, function (data, response) {
       resolve(data);
     });
   });
@@ -34,7 +34,7 @@ var getRouteCongestionRate = function(getReqBody) {
       data: getReqBody,
       headers: {"Content-Type": "application/json"}
     };
-    client.post("http://130.65.159.197:5000/getCongestionVsTime", args, function (data, response) {
+    client.post("http://130.65.159.175:5000/getCongestionVsTime", args, function (data, response) {
       resolve(data);
     });
   });
@@ -91,7 +91,7 @@ exports.setStreetCongestionRate = function (req, res) {
     headers: {"Content-Type": "application/json"}
   };
 
-  client.post("http://130.65.159.197:5000/CongestionPerStreet", args, function (data, response) {
+  client.post("http://130.65.159.175:5000/CongestionPerStreet", args, function (data, response) {
     res.send(data);
   });
 

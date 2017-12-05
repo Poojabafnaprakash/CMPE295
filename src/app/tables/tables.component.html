@@ -1,73 +1,97 @@
 <div class="main-content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="header">
-                        <h4 class="title"> Current Congestion Rate of Route</h4>
-                        <p class="category">Congestion rate on each street</p>
-                    </div>
-                    <div class="content table-responsive table-full-width">
-         <form ngNativeValidate class="" (ngSubmit)="submitCPForm(presentCongestionForm)" #presentCongestionForm="ngForm">
-              <div class="form-group col-xs-3" style="padding-left: 0px;"> 
-                <input type="text" class="form-control" id="source" [(ngModel)] = "userInputData.source" placeholder="Enter source" name = "source"required /> 
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
+            <h4 class="title"> Current Congestion Rate of Route</h4>
+            <p class="category">Congestion rate on each street</p>
+          </div>
+          <div class="content table-responsive table-full-width">
+            <form ngNativeValidate class="" (ngSubmit)="submitCPForm(presentCongestionForm)"
+                  #presentCongestionForm="ngForm">
+              <div class="form-group col-xs-3" style="padding-left: 0px;">
+                <input type="text" class="form-control" id="source" [(ngModel)]="userInputData.source"
+                       placeholder="Enter source" name="source" required/>
               </div>
-              <div class="form-group col-xs-3" style="padding-left: 0px;"> 
-                <input type="text" class="form-control" id="destination" placeholder="Enter destination" #destination name="destination" [(ngModel)] = "userInputData.destination" required /> 
+              <div class="form-group col-xs-3" style="padding-left: 0px;">
+                <input type="text" class="form-control" id="destination" placeholder="Enter destination" #destination
+                       name="destination" [(ngModel)]="userInputData.destination" required/>
               </div>
-              <div class="form-group col-xs-3" style="padding-left: 0px;"> 
-                <input type="time" class="form-control" id="time"  placeholder="Enter time" [(ngModel)] = "userInputData.time" name= "time" required /> 
+              <div class="form-group col-xs-3" style="padding-left: 0px;">
+                <input type="time" class="form-control" id="time" placeholder="Enter time"
+                       [(ngModel)]="userInputData.time" name="time" required/>
               </div>
-              <div class="form-group col-xs-2"> <button type="submit" class="btn btn-info btn-fill">Get Results</button> </div>
-          </form>
-
-
-                          <table *ngIf= "tableDataFlag" class="table table-hover table-striped">
-                                <thead>
-                                    <tr>
-                                        <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let row of tableData1.dataRows">
-                                        <td *ngFor="let cell of row">{{cell}}</td>
-                                    </tr>
-                                </tbody>
-                          </table>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="card card-plain">
-                    <div class="header">
-                        <h4 class="title"> Check congestion rate for upcoming trip</h4>
-                        <p class="category">Congestioon rate on each streetZ</p>
-                    </div>
-                    <div class="content table-responsive table-full-width">
-
-                          <form ngNativeValidate class="" (ngSubmit)="submitCFForm(futureCongestionForm)" #futureCongestionForm="ngForm">
-              <div class="form-group col-xs-3" style="padding-left: 0px;"> <input type="text" class="form-control" id="sourceF" name = "source" [(ngModel)] = "userInputDataF.source" placeholder="Enter source" required /> </div>
-              <div class="form-group col-xs-3" style="padding-left: 0px;"> <input type="text" class="form-control" id="destinationF" name = "destination" placeholder="Enter destination" #destination name="destination" [(ngModel)] = "userInputDataF.destination" required /> </div>
-              <div class="form-group col-xs-3" style="padding-left: 0px;"> <input type="text" class="form-control" id="day" placeholder="Enter day" [(ngModel)] = "userInputDataF.day"  name="day" required /> </div>
-              <div class="form-group col-xs-3" style="padding-left: 0px;"> <input type="time" class="form-control" [(ngModel)] = "userInputDataF.time" id="timeP" placeholder="Enter time" name="time" required /> </div>
-              <div class="form-group col-xs-2"> <button type="submit" class="btn btn-info btn-fill">Get Results</button> </div>
+              <div class="form-group col-xs-2">
+                <button type="submit" class="btn btn-info btn-fill">Get Results</button>
+              </div>
             </form>
-                        <table *ngIf= "tableDataFFlag" class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th *ngFor="let cell of tableData2.headerRow">{{ cell }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let row of tableData2.dataRows">
-                                    <td *ngFor="let cell of row">{{cell}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+
+
+            <table *ngIf="tableDataFlag" class="table table-hover table-striped">
+              <thead>
+              <tr>
+                <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let row of tableData1.dataRows">
+                <td *ngFor="let cell of row">{{cell}}</td>
+              </tr>
+              </tbody>
+            </table>
+
+          </div>
         </div>
+      </div>
+      <div class="col-md-12">
+        <div class="card card-plain">
+          <div class="header">
+            <h4 class="title"> Check congestion rate for upcoming trip</h4>
+            <p class="category">Congestioon rate on each streetZ</p>
+          </div>
+          <div class="content table-responsive table-full-width">
+
+            <form ngNativeValidate class="" (ngSubmit)="submitCFForm(futureCongestionForm)"
+                  #futureCongestionForm="ngForm">
+              <div class="form-group col-xs-3" style="padding-left: 0px;"><input type="text" class="form-control"
+                                                                                 id="sourceF" name="source"
+                                                                                 [(ngModel)]="userInputDataF.source"
+                                                                                 placeholder="Enter source" required/>
+              </div>
+              <div class="form-group col-xs-3" style="padding-left: 0px;"><input type="text" class="form-control"
+                                                                                 id="destinationF" name="destination"
+                                                                                 placeholder="Enter destination"
+                                                                                 #destination name="destination"
+                                                                                 [(ngModel)]="userInputDataF.destination"
+                                                                                 required/></div>
+              <div class="form-group col-xs-3" style="padding-left: 0px;"><input type="text" class="form-control"
+                                                                                 id="day" placeholder="Enter day"
+                                                                                 [(ngModel)]="userInputDataF.day"
+                                                                                 name="day" required/></div>
+              <div class="form-group col-xs-3" style="padding-left: 0px;"><input type="time" class="form-control"
+                                                                                 [(ngModel)]="userInputDataF.time"
+                                                                                 id="timeP" placeholder="Enter time"
+                                                                                 name="time" required/></div>
+              <div class="form-group col-xs-2">
+                <button type="submit" class="btn btn-info btn-fill">Get Results</button>
+              </div>
+            </form>
+            <table *ngIf="tableDataFFlag" class="table table-hover">
+              <thead>
+              <tr>
+                <th *ngFor="let cell of tableData2.headerRow">{{ cell }}</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let row of tableData2.dataRows">
+                <td *ngFor="let cell of row">{{cell}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
