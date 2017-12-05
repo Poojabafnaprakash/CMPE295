@@ -114,15 +114,32 @@
               </select>
             </div>
             <div class="form-group col-xs-2" style="padding-left: 0px;">
-              <select type="text" class="form-control" id="dayOfWeek" placeholder="Day" #destination [(ngModel)]="routeGraphStreetCongestionRate.dayOfWeek" name="dayOfWeek" required>
-                <option value="" selected disabled>Enter day</option>
-                <option>Monday</option>
-                <option>Tuesday</option>
-                <option>Wednesday</option>
-                <option>Thursday</option>
-                <option>Friday</option>
-                <option>Saturday</option>
-                <option>Sunday</option>
+              <select type="text" class="form-control" id="timeOfDay" placeholder="Time" #destination [(ngModel)]="routeGraphStreetCongestionRate.timeOfDay" name="timeOfDay" required>
+                <option value="" selected disabled>Enter time(hh:mm:ss)</option>
+                <option>00:00:00</option>
+                <option>01:00:00</option>
+                <option>02:00:00</option>
+                <option>03:00:00</option>
+                <option>04:00:00</option>
+                <option>05:00:00</option>
+                <option>06:00:00</option>
+                <option>07:00:00</option>
+                <option>08:00:00</option>
+                <option>09:00:00</option>
+                <option>10:00:00</option>
+                <option>11:00:00</option>
+                <option>12:00:00</option>
+                <option>13:00:00</option>
+                <option>14:00:00</option>
+                <option>15:00:00</option>
+                <option>16:00:00</option>
+                <option>17:00:00</option>
+                <option>18:00:00</option>
+                <option>19:00:00</option>
+                <option>20:00:00</option>
+                <option>21:00:00</option>
+                <option>22:00:00</option>
+                <option>23:00:00</option>
               </select>
             </div>
             <div class="form-group col-xs-2"> <button type="submit" class="btn btn-info btn-fill">Get Results</button> </div>

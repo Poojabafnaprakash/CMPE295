@@ -453,7 +453,7 @@ export class HomeComponent implements OnInit {
     this.statusCode = null;
     this.homeGraphService.routeCongestionTimeMethod(this.routeGraphCongestionRate)
       .subscribe(successCode => {
-        this.showProgress2 = true;
+        this.showProgress2 = false;
         this.graphDataCongestionRate = successCode;
         this.data2 = [
           {
@@ -470,42 +470,40 @@ export class HomeComponent implements OnInit {
   getStreetCongestionRate(streetCongestionRateForm: NgForm) {
     this.options3 = {
       chart: {
-        type: 'lineChart',
+        type: 'discreteBarChart',
         height: 450,
         margin: {
           top: 20,
           right: 20,
-          bottom: 40,
+          bottom: 50,
           left: 55
         },
         x: function(d) { return d.label; },
         y: function(d) { return d.value; },
-        useInteractiveGuideline: true,
+        showValues: true,
+        valueFormat: function(d) {
+          return d3.format(',.0f')(d);
+        },
+        duration: 500,
         xAxis: {
-          axisLabel: 'Time (hours)'
+          axisLabel: 'Days'
         },
         yAxis: {
           axisLabel: 'Congestion Rate (%)',
-          tickFormat: function(d) {
-            return d3.format('.2f')(d);
-          },
           axisLabelDistance: -10
         }
       }
-    };
+    }
 
     this.showProgress3 = true;
     this.statusCode = null;
     this.homeGraphService.streetCongestionTimeMethod(this.routeGraphStreetCongestionRate)
       .subscribe(successCode => {
-        this.showProgress3 = true;
+        this.showProgress3 = false;
         this.graphDataStreetCongestionRate = successCode;
         this.data3 = [
           {
-            values: this.graphDataStreetCongestionRate,
-            key: 'Congestion Rate',
-            color: '#7777ff',
-            area: true
+            values: this.graphDataStreetCongestionRate
           }
         ];
         console.log(this.graphDataStreetCongestionRate);

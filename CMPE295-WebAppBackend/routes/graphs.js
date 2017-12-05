@@ -81,9 +81,9 @@ exports.setRouteCongestionRate = function (req, res) {
 exports.setStreetCongestionRate = function (req, res) {
 
   var reqBody = {
-    "Street": req.body.Street,
-    "Direction": req.body.Direction,
-    "Time": req.body.Time
+    "Street": req.body.street,
+    "Direction": req.body.direction,
+    "Time": req.body.timeOfDay
   };
 
   var args = {
