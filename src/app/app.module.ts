@@ -15,7 +15,6 @@ import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
 import { TablesComponent } from './tables/tables.component';
 import { MapsComponent } from './maps/maps.component';
-import { NotificationsComponent } from './notifications/notifications.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserInputService } from './maps/user-input.service';
@@ -34,7 +33,6 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     UserComponent,
     TablesComponent,
     MapsComponent,
-    NotificationsComponent,
     LandingPageComponent,
     DashboardComponent
   ],

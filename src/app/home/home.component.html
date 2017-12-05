@@ -37,6 +37,18 @@
               <div class="form-group col-xs-2"> <button type="submit" class="btn btn-info btn-fill">Get Results</button> </div>
             </form>
           </div>
+          <div *ngIf="showProgress1" style="margin-left:40%">
+            <circle-progress
+              [percent]="95"
+              [radius]="50"
+              [outerStrokeWidth]="16"
+              [innerStrokeWidth]="8"
+              [outerStrokeColor]="green"
+              [innerStrokeColor]="blue"
+              [animation]="true"
+              [animationDuration]="900"
+            ></circle-progress>
+          </div>
           <nvd3 [options]="options" [data]="data"></nvd3>
         </div>
         <div class="col-md-12 well" style="border: 19px solid #e3e3e3;">
@@ -69,6 +81,18 @@
               </div>
               <div class="form-group col-xs-2"> <button type="submit" class="btn btn-info btn-fill">Get Results</button> </div>
             </form>
+          </div>
+          <div *ngIf="showProgress2" style="margin-left:40%">
+            <circle-progress
+              [percent]="95"
+              [radius]="50"
+              [outerStrokeWidth]="16"
+              [innerStrokeWidth]="8"
+              [outerStrokeColor]="green"
+              [innerStrokeColor]="blue"
+              [animation]="true"
+              [animationDuration]="900"
+            ></circle-progress>
           </div>
           <nvd3 [options]="options2" [data]="data2"></nvd3>
         </div>
@@ -103,6 +127,18 @@
             </div>
             <div class="form-group col-xs-2"> <button type="submit" class="btn btn-info btn-fill">Get Results</button> </div>
           </form>
+        </div>
+        <div *ngIf="showProgress3" style="margin-left:40%">
+          <circle-progress
+            [percent]="95"
+            [radius]="50"
+            [outerStrokeWidth]="16"
+            [innerStrokeWidth]="8"
+            [outerStrokeColor]="green"
+            [innerStrokeColor]="blue"
+            [animation]="true"
+            [animationDuration]="900"
+          ></circle-progress>
         </div>
         <nvd3 [options]="options3" [data]="data3"></nvd3>
       </div>

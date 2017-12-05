@@ -37,6 +37,9 @@ export class HomeComponent implements OnInit {
   destinationsRouteCongestionRate:any;
   streetsCongestionRate: any;
   directionsCongestionRate: any;
+  showProgress1:boolean = false;
+  showProgress2:boolean = false;
+  showProgress3:boolean = false;
 
   constructor(private homeGraphService: HomeGraphService) { }
 
@@ -403,9 +406,11 @@ export class HomeComponent implements OnInit {
         }
       }
     }
+    this.showProgress1 = true;
     this.statusCode = null;
     this.homeGraphService.routeTravelTimeMethod(this.routeGraphTravelTime)
       .subscribe(successCode => {
+        this.showProgress1 = false;
       this.graphDataTravelTime = successCode;
         this.data = [
           {
@@ -444,9 +449,11 @@ export class HomeComponent implements OnInit {
       }
     };
 
+    this.showProgress2 = true;
     this.statusCode = null;
     this.homeGraphService.routeCongestionTimeMethod(this.routeGraphCongestionRate)
       .subscribe(successCode => {
+        this.showProgress2 = true;
         this.graphDataCongestionRate = successCode;
         this.data2 = [
           {
@@ -487,9 +494,11 @@ export class HomeComponent implements OnInit {
       }
     };
 
+    this.showProgress3 = true;
     this.statusCode = null;
     this.homeGraphService.streetCongestionTimeMethod(this.routeGraphStreetCongestionRate)
       .subscribe(successCode => {
+        this.showProgress3 = true;
         this.graphDataStreetCongestionRate = successCode;
         this.data3 = [
           {
