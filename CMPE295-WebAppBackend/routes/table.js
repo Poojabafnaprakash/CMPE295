@@ -41,23 +41,10 @@ exports.getRouteCongestionDetails = function (req, res) {
     headers: {"Content-Type": "application/json"}
   };
 
-  var resData = {
-    tableList: [
-      { "streetName": ["casa verde", "zanker", "n st"],
-        "direction": ["south", "north", "south"],
-        "congestionRate": ["30%", "40%", "60%"]
-      }, {
-        "streetName": ["casa verde", "zanker", "n st"],
-        "direction": ["south", "north", "south"],
-        "congestionRate": ["30%", "40%", "60%"]
-      }]
-  };
-
-  // to do
-  // client.post("http://130.65.159.175:5000/CongestionPerStreet", args, function (data, response) {
-  //   res.send(data);
-  // });
-
-  res.send(resData);
-
+  client.post("http://130.65.159.175:5000/CongestionBlockView", args, function (data, response) {
+    var resData = {
+      tableList: data
+    };
+    res.send(resData);
+  });
 };

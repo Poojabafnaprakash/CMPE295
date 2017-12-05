@@ -39,7 +39,7 @@
                   </select>
                 </div>
                 <div class="form-group col-xs-2" style="padding-left: 0px;">
-                  <select type="text" class="form-control" id="timeOfDay" placeholder="Day" #destination
+                  <select type="text" class="form-control" id="timeOfDay" placeholder="Time" #destination
                           [(ngModel)]="userInputData.timeOfDay" name="timeOfDay" required>
                     <option value="" selected disabled>Enter time</option>
                     <option>00:00:00</option>
@@ -91,7 +91,7 @@
                   </thead>
                   <tbody>
                   <tr *ngFor="let row of tableData1.dataRows.tableList[0].streetName; index as i">
-                    <td>{{i}}</td>
+                    <td>{{i+1}}</td>
                     <td>{{tableData1.dataRows.tableList[0].streetName[i]}}</td>
                     <td>{{tableData1.dataRows.tableList[0].direction[i]}}</td>
                     <td>{{tableData1.dataRows.tableList[0].congestionRate[i]}}</td>
@@ -107,7 +107,7 @@
         <div class="card">
           <div class="col-md-12 well" style="border: 19px solid #e3e3e3;">
             <div class="header">
-              <h4 class="title">For 1 hour later</h4>
+              <h4 class="title">If you leave in an Hour</h4>
               <table class="table table-hover">
                 <thead>
                 <tr>
@@ -115,8 +115,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let row of tableData1.dataRows.tableList[1].streetName; index as j">
-                  <td>{{j}}</td>
+                <tr *ngFor="let row of tableData1.dataRows.tableList[1].streetName; index as j" [ngClass]="{'success': ((tableData1.dataRows.tableList[1].congestionRate[j]).slice(0, -1)) < 45, 'danger': ((tableData1.dataRows.tableList[1].congestionRate[j]).slice(0, -1)) > 70, 'warning': ((tableData1.dataRows.tableList[1].congestionRate[j]).slice(0, -1)) > 45 }">
+                  <td>{{j+1}}</td>
                   <td>{{tableData1.dataRows.tableList[1].streetName[j]}}</td>
                   <td>{{tableData1.dataRows.tableList[1].direction[j]}}</td>
                   <td>{{tableData1.dataRows.tableList[1].congestionRate[j]}}</td>

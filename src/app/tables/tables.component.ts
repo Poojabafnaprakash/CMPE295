@@ -32,7 +32,7 @@ export class TablesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userInputData = new UserInputForPresent('', '', '', '');
+    this.userInputData = new UserInputForPresent("", "", "", "");
     this.sources = ["Casa Verde Street ", "Alum Rock Park", "San Jose State University", "Avaya Stadium", "DMV San Jose", "MapR Technologies, 350 Holger Way", "Winchester Mystery House", "N 1st Street ", "Santana Row", "Costco Wholesale, 1709 Automation Pkwy, San Jose, CA 95131", "Downtown San Jose", "1302,The Alameda", "Mineta San Jose International Airport"];
     this.destinations = [""];
     this.userInputDataF = new UserInputForFuture('', '', '', '');
