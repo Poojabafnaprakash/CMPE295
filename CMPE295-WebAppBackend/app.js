@@ -58,7 +58,6 @@ app.post('/api/updateProfile', update.updateProfile);
 app.post('/api/routeTavelTime', graphs.setRouteTavelTime);
 app.post('/api/routeCongestionRate', graphs.setRouteCongestionRate);
 app.post('/api/routeCongestionDetails', table.getRouteCongestionDetails);
-app.post('/api/routeCongestionDetailF', table.getRouteCongestionDetailF);
 app.post('/api/userInput', directionsAPI.getDashboardCongestionRate);
 app.post('/api/congestionPerStreet', graphs.setStreetCongestionRate);
 

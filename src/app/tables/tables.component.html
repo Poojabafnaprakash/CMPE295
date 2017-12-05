@@ -4,91 +4,126 @@
       <div class="col-md-12">
         <div class="card">
           <div class="header">
-            <h4 class="title"> Current Congestion Rate of Route</h4>
-            <p class="category">Congestion rate on each street</p>
+            <h4 class="title"> Current Congestion Rate of Route</h4> <br/>
           </div>
-          <div class="content table-responsive table-full-width">
-            <form ngNativeValidate class="" (ngSubmit)="submitCPForm(presentCongestionForm)"
-                  #presentCongestionForm="ngForm">
-              <div class="form-group col-xs-3" style="padding-left: 0px;">
-                <input type="text" class="form-control" id="source" [(ngModel)]="userInputData.source"
-                       placeholder="Enter source" name="source" required/>
-              </div>
-              <div class="form-group col-xs-3" style="padding-left: 0px;">
-                <input type="text" class="form-control" id="destination" placeholder="Enter destination" #destination
-                       name="destination" [(ngModel)]="userInputData.destination" required/>
-              </div>
-              <div class="form-group col-xs-3" style="padding-left: 0px;">
-                <input type="time" class="form-control" id="time" placeholder="Enter time"
-                       [(ngModel)]="userInputData.time" name="time" required/>
-              </div>
-              <div class="form-group col-xs-2">
-                <button type="submit" class="btn btn-info btn-fill">Get Results</button>
-              </div>
-            </form>
-
-
-            <table *ngIf="tableDataFlag" class="table table-hover table-striped">
-              <thead>
-              <tr>
-                <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr *ngFor="let row of tableData1.dataRows">
-                <td *ngFor="let cell of row">{{cell}}</td>
-              </tr>
-              </tbody>
-            </table>
-
+          <div class="col-md-12 well" style="border: 19px solid #e3e3e3;">
+            <div class="header">
+              <h4 class="title">For selected Time</h4>
+              <form ngNativeValidate class="" (ngSubmit)="congestionDetailsFormMethod()" #routeTavelTimeForm="ngForm">
+                <div class="form-group col-xs-3" style="padding-left: 0px;">
+                  <select type="text" class="form-control" id="source" placeholder="Source" #source
+                          [(ngModel)]="userInputData.source" name="source" (ngModelChange)="modelChanged($event)"
+                          required>
+                    <option value="" selected disabled>Enter source</option>
+                    <option *ngFor="let source of sources"> {{source}}</option>
+                  </select>
+                </div>
+                <div class="form-group col-xs-3" style="padding-left: 0px;">
+                  <select type="text" class="form-control" id="destination" placeholder="Destination" #destination
+                          [(ngModel)]="userInputData.destination" name="destination" required>
+                    <option value="" selected disabled>Enter destination</option>
+                    <option *ngFor="let destination of destinations"> {{destination}}</option>
+                  </select>
+                </div>
+                <div class="form-group col-xs-2" style="padding-left: 0px;">
+                  <select type="text" class="form-control" id="dayOfWeek" placeholder="Day" #destination
+                          [(ngModel)]="userInputData.dayOfWeek" name="dayOfWeek" required>
+                    <option value="" selected disabled>Enter day</option>
+                    <option>Monday</option>
+                    <option>Tuesday</option>
+                    <option>Wednesday</option>
+                    <option>Thursday</option>
+                    <option>Friday</option>
+                    <option>Saturday</option>
+                    <option>Sunday</option>
+                  </select>
+                </div>
+                <div class="form-group col-xs-2" style="padding-left: 0px;">
+                  <select type="text" class="form-control" id="timeOfDay" placeholder="Day" #destination
+                          [(ngModel)]="userInputData.timeOfDay" name="timeOfDay" required>
+                    <option value="" selected disabled>Enter time</option>
+                    <option>00:00:00</option>
+                    <option>01:00:00</option>
+                    <option>02:00:00</option>
+                    <option>03:00:00</option>
+                    <option>04:00:00</option>
+                    <option>05:00:00</option>
+                    <option>06:00:00</option>
+                    <option>07:00:00</option>
+                    <option>08:00:00</option>
+                    <option>09:00:00</option>
+                    <option>10:00:00</option>
+                    <option>11:00:00</option>
+                    <option>12:00:00</option>
+                    <option>13:00:00</option>
+                    <option>14:00:00</option>
+                    <option>15:00:00</option>
+                    <option>16:00:00</option>
+                    <option>17:00:00</option>
+                    <option>18:00:00</option>
+                    <option>19:00:00</option>
+                    <option>20:00:00</option>
+                    <option>21:00:00</option>
+                    <option>22:00:00</option>
+                    <option>23:00:00</option>
+                  </select>
+                </div>
+                <div class="form-group col-xs-2">
+                  <button type="submit" class="btn btn-info btn-fill">Get Results</button>
+                </div>
+                <div *ngIf="showProgress" style="margin-left:40%">
+                  <circle-progress
+                    [percent]="95"
+                    [radius]="50"
+                    [outerStrokeWidth]="16"
+                    [innerStrokeWidth]="8"
+                    [outerStrokeColor]="green"
+                    [innerStrokeColor]="blue"
+                    [animation]="true"
+                    [animationDuration]="900"
+                  ></circle-progress>
+                </div>
+                <table *ngIf="tableDataFlag" class="table table-hover">
+                  <thead>
+                  <tr>
+                    <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let row of tableData1.dataRows.tableList[0].streetName; index as i">
+                    <td>{{i}}</td>
+                    <td>{{tableData1.dataRows.tableList[0].streetName[i]}}</td>
+                    <td>{{tableData1.dataRows.tableList[0].direction[i]}}</td>
+                    <td>{{tableData1.dataRows.tableList[0].congestionRate[i]}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-md-12">
-        <div class="card card-plain">
-          <div class="header">
-            <h4 class="title"> Check congestion rate for upcoming trip</h4>
-            <p class="category">Congestioon rate on each streetZ</p>
-          </div>
-          <div class="content table-responsive table-full-width">
-
-            <form ngNativeValidate class="" (ngSubmit)="submitCFForm(futureCongestionForm)"
-                  #futureCongestionForm="ngForm">
-              <div class="form-group col-xs-3" style="padding-left: 0px;"><input type="text" class="form-control"
-                                                                                 id="sourceF" name="source"
-                                                                                 [(ngModel)]="userInputDataF.source"
-                                                                                 placeholder="Enter source" required/>
-              </div>
-              <div class="form-group col-xs-3" style="padding-left: 0px;"><input type="text" class="form-control"
-                                                                                 id="destinationF" name="destination"
-                                                                                 placeholder="Enter destination"
-                                                                                 #destination name="destination"
-                                                                                 [(ngModel)]="userInputDataF.destination"
-                                                                                 required/></div>
-              <div class="form-group col-xs-3" style="padding-left: 0px;"><input type="text" class="form-control"
-                                                                                 id="day" placeholder="Enter day"
-                                                                                 [(ngModel)]="userInputDataF.day"
-                                                                                 name="day" required/></div>
-              <div class="form-group col-xs-3" style="padding-left: 0px;"><input type="time" class="form-control"
-                                                                                 [(ngModel)]="userInputDataF.time"
-                                                                                 id="timeP" placeholder="Enter time"
-                                                                                 name="time" required/></div>
-              <div class="form-group col-xs-2">
-                <button type="submit" class="btn btn-info btn-fill">Get Results</button>
-              </div>
-            </form>
-            <table *ngIf="tableDataFFlag" class="table table-hover">
-              <thead>
-              <tr>
-                <th *ngFor="let cell of tableData2.headerRow">{{ cell }}</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr *ngFor="let row of tableData2.dataRows">
-                <td *ngFor="let cell of row">{{cell}}</td>
-              </tr>
-              </tbody>
-            </table>
+      <div class="col-md-12" *ngIf="tableDataFlag">
+        <div class="card">
+          <div class="col-md-12 well" style="border: 19px solid #e3e3e3;">
+            <div class="header">
+              <h4 class="title">For 1 hour later</h4>
+              <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let row of tableData1.dataRows.tableList[1].streetName; index as j">
+                  <td>{{j}}</td>
+                  <td>{{tableData1.dataRows.tableList[1].streetName[j]}}</td>
+                  <td>{{tableData1.dataRows.tableList[1].direction[j]}}</td>
+                  <td>{{tableData1.dataRows.tableList[1].congestionRate[j]}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
