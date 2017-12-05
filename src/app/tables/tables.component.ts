@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {UserInputForPresent} from './model/userInputForPresent';
-import {UserInputForFuture} from './model/userInputForFuture';
 import {TablesService} from './tables.services';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgForm} from '@angular/forms';
@@ -18,11 +17,8 @@ declare interface TableData {
 
 export class TablesComponent implements OnInit {
   public tableData1: TableData;
-  public tableData2: TableData;
   public tableDataFlag: boolean = false;
-  public tableDataFFlag: boolean = false;
   public userInputData: UserInputForPresent;
-  public userInputDataF: UserInputForFuture;
   sources:any;
   destinations:any;
   showProgress:boolean = false;
@@ -35,7 +31,6 @@ export class TablesComponent implements OnInit {
     this.userInputData = new UserInputForPresent("", "", "", "");
     this.sources = ["Casa Verde Street ", "Alum Rock Park", "San Jose State University", "Avaya Stadium", "DMV San Jose", "MapR Technologies, 350 Holger Way", "Winchester Mystery House", "N 1st Street ", "Santana Row", "Costco Wholesale, 1709 Automation Pkwy, San Jose, CA 95131", "Downtown San Jose", "1302,The Alameda", "Mineta San Jose International Airport"];
     this.destinations = [""];
-    this.userInputDataF = new UserInputForFuture('', '', '', '');
   }
 
   modelChanged(newObj: any) {
@@ -72,33 +67,11 @@ export class TablesComponent implements OnInit {
     }
   }
 
-// getCongestionDetailValueForFuture () {
-//   var obj = {
-//      "source": this.userInputDataF.source,
-//      "destination": this.userInputDataF.destination,
-//      "day": this.userInputDataF.day,
-//      "time" : this.userInputDataF.time
-//    }
-//
-//     this.tablesService.congestionDetailFuture(obj).subscribe((data) => {
-//     if(data != undefined && data != '') {
-//      console.log('inside final data********');
-//      console.log(data);
-//      this.tableData2 = {
-//           headerRow: [ 'S.No.', 'Street Name', 'Direction', 'Congestion Rate'],
-//           dataRows: data
-//       };
-//       this.tableDataFFlag = true;
-//     }
-//   })
-// }
-
   congestionDetailsFormMethod() {
     this.showProgress = true;
     this.tablesService.congestionDetailPresent(this.userInputData).subscribe((data) => {
       this.showProgress = false;
       if (data != undefined && data != '') {
-        console.log(data);
         this.tableData1 = {
           headerRow: ['S.No.', 'Street Name', 'Direction', 'Congestion Rate'],
           dataRows: data
@@ -107,18 +80,5 @@ export class TablesComponent implements OnInit {
       }
     })
   }
-
-  // submitCPForm(presentCongestionForm: NgForm) {
-  //   console.log("write the post request");
-  //   console.log(this.userInputData.source);
-  //   this.getCongestionDetailValue();
-  // }
-  //
-  // submitCFForm(futureCongestionForm: NgForm) {
-  //   console.log("write the post request");
-  //   console.log(this.userInputDataF.source);
-  //   this.getCongestionDetailValueForFuture();
-  // }
-
 }
 

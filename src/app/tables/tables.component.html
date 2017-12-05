@@ -90,7 +90,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr *ngFor="let row of tableData1.dataRows.tableList[0].streetName; index as i">
+                  <tr *ngFor="let row of tableData1.dataRows.tableList[0].streetName; index as i" [ngClass]="{'success': ((tableData1.dataRows.tableList[0].congestionRate[i]).slice(0, -1)) < 45, 'danger': ((tableData1.dataRows.tableList[0].congestionRate[i]).slice(0, -1)) > 70, 'warning': ((tableData1.dataRows.tableList[0].congestionRate[i]).slice(0, -1)) > 45 }">
                     <td>{{i+1}}</td>
                     <td>{{tableData1.dataRows.tableList[0].streetName[i]}}</td>
                     <td>{{tableData1.dataRows.tableList[0].direction[i]}}</td>

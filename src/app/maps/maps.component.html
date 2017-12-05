@@ -87,7 +87,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="info" *ngFor="let prediction of predictionResult">
+              <tr class="info" *ngFor="let prediction of predictionResult" [ngClass]="{'success': ((prediction.CongestionRate).slice(0, -1)) < 45, 'danger': ((prediction.CongestionRate).slice(0, -1)) > 70, 'warning': ((prediction.CongestionRate).slice(0, -1)) > 45 }">
                 <td>{{ prediction.StreetName }}</td>
                 <td>{{prediction.CongestionRate}}</td>
               </tr>
