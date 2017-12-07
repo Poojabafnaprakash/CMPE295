@@ -120,7 +120,7 @@ exports.hompage = function (req, res) {
 
 exports.userprofile = function (req, res) {
     if (req.session.email && req.session.name) {
-        res.render("profilepage", {
+        res.status(200).render("profilepage", {
             email: req.session.email,
             phone: req.session.phone,
             name: req.session.name,
@@ -142,5 +142,5 @@ exports.logout = function (req, res) {
         }
     }, updateUser);
     req.session.destroy();
-    res.redirect('/');
+    res.status(200).redirect('/');
 };

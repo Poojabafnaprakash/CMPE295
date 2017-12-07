@@ -18,7 +18,7 @@ exports.setFavorite = function (req, res) {
             json_responses = {
                 "statusCode": 200
             };
-            res.send(json_responses);
+            res.status(200).send(json_responses);
         }
     }, insertUserFavorite);
 };

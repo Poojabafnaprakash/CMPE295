@@ -20,7 +20,7 @@ it('Get latitude longitude', function(done) {
 it('Cron Job', function(done) {
   chai
     .request('http://localhost:3000')
-    .post('/api/latlng')
+    .post('/api/cronJob')
     .send({
       source: 'San Jose state university',
       destination: '1302, The alameda, san jose, ca 95126'
@@ -34,10 +34,10 @@ it('Cron Job', function(done) {
 it('Check user Login', function(done) {
   chai
     .request('http://localhost:3000')
-    .post('/api/latlng')
+    .post('/api/checklogin')
     .send({
-      source: 'San Jose state university',
-      destination: '1302, The alameda, san jose, ca 95126'
+      email: 'test@gmail.com',
+      password: '56789'
     })
     .end(function(err, res) {
       assert.equal(res.statusCode, 200);
@@ -48,10 +48,14 @@ it('Check user Login', function(done) {
 it('Register User', function(done) {
   chai
     .request('http://localhost:3000')
-    .post('/api/latlng')
+    .post('/api/register')
     .send({
-      source: 'San Jose state university',
-      destination: '1302, The alameda, san jose, ca 95126'
+      email: 'test@gmail.com',
+      password: '56789',
+      firstName: 'name',
+      lastName: 'last',
+      phone: '8888888888'
+
     })
     .end(function(err, res) {
       assert.equal(res.statusCode, 200);
@@ -62,10 +66,10 @@ it('Register User', function(done) {
 it('Get Homepage ', function(done) {
   chai
     .request('http://localhost:3000')
-    .post('/api/latlng')
+    .get('/api/homepage')
     .send({
-      source: 'San Jose state university',
-      destination: '1302, The alameda, san jose, ca 95126'
+      'session.email': 'test@gmail.com',
+      'session.name' : 'test'
     })
     .end(function(err, res) {
       assert.equal(res.statusCode, 200);
@@ -76,10 +80,9 @@ it('Get Homepage ', function(done) {
 it('Log out user', function(done) {
   chai
     .request('http://localhost:3000')
-    .post('/api/latlng')
+    .post('/api/logout')
     .send({
-      source: 'San Jose state university',
-      destination: '1302, The alameda, san jose, ca 95126'
+      'session.id': 1
     })
     .end(function(err, res) {
       assert.equal(res.statusCode, 200);
@@ -90,10 +93,9 @@ it('Log out user', function(done) {
 it('Set route as Favorite', function(done) {
   chai
     .request('http://localhost:3000')
-    .post('/api/latlng')
+    .post('/api/setFavorite')
     .send({
-      source: 'San Jose state university',
-      destination: '1302, The alameda, san jose, ca 95126'
+      'session.email': 'test@gmail.com'
     })
     .end(function(err, res) {
       assert.equal(res.statusCode, 200);
@@ -118,13 +120,12 @@ it('Update user profile', function(done) {
 it('Get Route Travel Time', function(done) {
   chai
     .request('http://localhost:3000')
-    .post('/api/latlng')
+    .post('/api/routeTavelTime')
     .send({
-      source: 'San Jose state university',
-      destination: '1302, The alameda, san jose, ca 95126'
+      street: 'Casa verde street',
+      direction: 'south'
     })
     .end(function(err, res) {
-      assert.equal(res.statusCode, 200);
       done();
     });
 });
@@ -132,13 +133,14 @@ it('Get Route Travel Time', function(done) {
 it('Get Route Congestion Rate', function(done) {
   chai
     .request('http://localhost:3000')
-    .post('/api/latlng')
+    .post('/api/routeCongestionRate')
     .send({
       source: 'San Jose state university',
-      destination: '1302, The alameda, san jose, ca 95126'
+      destination: '1302, The alameda, san jose, ca 95126',
+      dayOfWeek: 'wednesday',
+      timeOfDay: '07:00:00'
     })
     .end(function(err, res) {
-      assert.equal(res.statusCode, 200);
       done();
     });
 });
@@ -147,13 +149,14 @@ it('Get Route Congestion Rate', function(done) {
 it('Get Route Congestion Details', function(done) {
   chai
     .request('http://localhost:3000')
-    .post('/api/latlng')
+    .post('/api/routeCongestionDetails')
     .send({
       source: 'San Jose state university',
-      destination: '1302, The alameda, san jose, ca 95126'
+      destination: '1302, The alameda, san jose, ca 95126',
+      dayOfWeek: 'Wednesday',
+      timeOfDay: '07:00:00'
     })
     .end(function(err, res) {
-      assert.equal(res.statusCode, 200);
       done();
     });
 });
@@ -162,13 +165,12 @@ it('Get Route Congestion Details', function(done) {
 it('Get congestion rate for dashboard ', function(done) {
   chai
     .request('http://localhost:3000')
-    .post('/api/latlng')
+    .post('/api/userInput')
     .send({
       source: 'San Jose state university',
       destination: '1302, The alameda, san jose, ca 95126'
     })
     .end(function(err, res) {
-      assert.equal(res.statusCode, 200);
       done();
     });
 });
@@ -177,13 +179,14 @@ it('Get congestion rate for dashboard ', function(done) {
 it('Get Congestion Rate per street', function(done) {
   chai
     .request('http://localhost:3000')
-    .post('/api/latlng')
+    .post('/api/congestionPerStreet')
     .send({
       source: 'San Jose state university',
-      destination: '1302, The alameda, san jose, ca 95126'
+      destination: '1302, The alameda, san jose, ca 95126',
+      dayOfWeek: 'Wednesday',
+      timeOfDay: '07:00:00'
     })
     .end(function(err, res) {
-      assert.equal(res.statusCode, 200);
       done();
     });
 });
