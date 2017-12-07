@@ -74,7 +74,7 @@ exports.latLng = function (req, res) {
                 "latLngSteps": stepsLatLng
             }
             console.log(json_responses);
-            res.send(json_responses);
+            res.status(200).send(json_responses);
         }
     });
 };

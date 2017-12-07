@@ -1,22 +1,22 @@
 var mysql = require('./mysql');
 var CryptoJS = require("crypto-js");
+
 var SimpleNodeLogger = require('simple-node-logger'),
     opts = {
-        logFilePath: 'mylogfile.log',
+        logFilePath: '295-WebServer.log',
         timestampFormat: 'YYYY-MM-DD HH:mm:ss.SSS'
     },
     log = SimpleNodeLogger.createSimpleLogger(opts);
-var log = SimpleNodeLogger.createSimpleFileLogger('project.log');
+var log = SimpleNodeLogger.createSimpleFileLogger('295-WebServer-project.log');
 
 exports.checkLogin = function (req, res) {
     var email = req.param("email");
     var password = req.param("password");
     var json_responses;
-    var getUser = "select * from Users where email='" + email
+    var fetchUser = "select * from Users where email='" + email
         + "'";
-    log.info(getUser);
+    log.info(fetchUser);
     mysql.fetchData(function (err, results) {
-        console.log("DB Results:" + results);
         if (err) {
             throw err;
         } else {
@@ -24,17 +24,15 @@ exports.checkLogin = function (req, res) {
                 var pwd = results[0].password;
                 var bytes = CryptoJS.AES.decrypt(pwd.toString(), 'cmpe295');
                 var plaintext = bytes.toString(CryptoJS.enc.Utf8);
-                console.log(password);
-                console.log("plaintext: " + plaintext);
                 if (plaintext == password) {
                     req.session.email = results[0].email;
                     req.session.name = results[0].firstname;
                     req.session.lastname = results[0].lastname;
                     req.session.id = results[0].user_id;
                     req.session.phone = results[0].phone;
-                    var lastlogdt = results[0].lastlogin;
-                    if (lastlogdt != null) {
-                        req.session.lastlogin = lastlogdt.substring(0, 25);
+                    var loginDate = results[0].lastlogin;
+                    if (loginDate != null) {
+                        req.session.lastlogin = loginDate.substring(0, 25);
                     } else {
                         req.session.lastlogin = '';
                     }
@@ -60,7 +58,7 @@ exports.checkLogin = function (req, res) {
 
             }
         }
-    }, getUser);
+    }, fetchUser);
 
 };
 
@@ -73,7 +71,7 @@ exports.register = function (req, res) {
     var json_responses;
     var dt = new Date();
     var ciphertext = CryptoJS.AES.encrypt(password, 'cmpe295');
-    var insertUser = "insert into Users(email,password,firstName,lastName,lastlogin,phone) values('"
+    var insertUser = "insert into Users(email, password, firstName, lastName, lastlogin, phone) values('"
         + email
         + "','"
         + ciphertext
@@ -86,10 +84,7 @@ exports.register = function (req, res) {
         + "','"
         + phone
         + "')";
-    console.log("before mysql: " + insertUser);
     mysql.insertData(function (err, results) {
-        console.log("DB Results in login:" + JSON.stringify(results));
-        console.log("req: " + req.session);
         if (err) {
             throw err;
         } else {
@@ -107,12 +102,8 @@ exports.register = function (req, res) {
 
 };
 
-exports.redirectToHomepage = function (req, res) {
-    // Checks before redirecting whether the session is valid
+exports.hompage = function (req, res) {
     if (req.session.email && req.session.name) {
-        // Set these headers to notify the browser not to maintain any cache for
-        // the page being loaded
-        log.info("The user " + req.session.id + "accessing /homepage");
         res
             .header(
                 'Cache-Control',
@@ -124,14 +115,11 @@ exports.redirectToHomepage = function (req, res) {
     } else {
         log.info("Session expired for the user " + req.session.id);
         res.redirect('/');
-        // res.render('login', { title: 'Login' });
     }
 };
 
 exports.userprofile = function (req, res) {
-    // Checks before redirecting whether the session is valid
     if (req.session.email && req.session.name) {
-        log.info("The user " + req.session.id + "accessing /userprofile");
         res.render("profilepage", {
             email: req.session.email,
             phone: req.session.phone,
@@ -145,12 +133,10 @@ exports.userprofile = function (req, res) {
 };
 
 exports.logout = function (req, res) {
-    log.info("The user " + req.session.id + "logging out");
     var dt = new Date();
     updateUser = "update Users set lastlogin= '" + dt.toString() + "' where user_id="
         + req.session.id;
     mysql.updateData(function (err, results) {
-        console.log("DB Results:" + results);
         if (err) {
             throw err;
         }

@@ -47,11 +47,10 @@ app.get('/distance', directionsAPI.directions);
 app.get('/time', directionsAPI.totalTime);
 
 app.use('/api/cronJob', directionsAPI.cronJob);
-// app.post('/api/userInput', directionsAPI.userInput);
 app.post('/api/latlng', directionsAPI.latLng);
 app.post('/api/checklogin', login.checkLogin);
 app.post('/api/register', login.register);
-app.get('/api/homepage', login.redirectToHomepage);
+app.get('/api/homepage', login.hompage);
 app.post('/api/logout', login.logout);
 app.post('/api/setFavorite', favorite.setFavorite);
 app.post('/api/updateProfile', update.updateProfile);
