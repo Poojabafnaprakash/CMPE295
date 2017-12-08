@@ -1,0 +1,792 @@
+[
+  {
+    "Id": 1,
+	"Source":"Casa Verde Street",
+	"Destination":"Mineta San Jose International Airport",
+    "Travel Time": "15 min",
+    "Steps":[
+      {
+        "Street":"Casa Verde St",
+        "Direction":"North"
+      },
+      {
+        "Street":"Zanker Rd",
+        "Direction":"South"
+      },
+      {
+        "Street":"River Oaks Pkwy",
+        "Direction":"West"
+      },
+      {
+        "Street":"N 1st St",
+        "Direction":"South"
+      },
+
+      {
+        "Street":"Orchard Pkwy",
+        "Direction":"West"
+      },
+      {
+        "Street":"CA-87 S",
+        "Direction":"South"
+      }
+      ,
+      {
+        "Street":"Skyport Dr",
+        "Direction":"East"
+      }
+    ]
+
+
+},
+  {
+    "Id": 2,
+    "Source": "Alum Rock Park",
+    "Destination": "San Jose State University",
+    "Travel Time": "22 mins",
+    "Steps": [
+      {
+        "Street": "Alum Rock Falls Rd",
+        "Direction": "West"
+      },
+      {
+        "Street": "Penitencia Creek Rd",
+        "Direction": "West"
+      },
+      {
+        "Street": "Toyon Av",
+        "Direction": "South"
+      },
+      {
+        "Street": "McKee Rd",
+        "Direction": "West"
+      },
+      {
+        "Street": "I-680 S",
+        "Direction": "South"
+      },
+      {
+        "Street": "I-280 N",
+        "Direction": "North"
+      },
+      {
+        "Street": "N 7th St",
+        "Direction": "North"
+      }
+    ]
+  },
+  {   "Id": 3,
+	"Source":"Casa Verde Street",
+	"Destination": "San Jose State University",
+    "Travel Time": "18 mins",
+    "Steps":[
+     {
+       "Street":"Casa Verde St",
+       "Direction":"North"
+     },
+     {
+       "Street":"Baypointe Pkwy",
+       "Direction":"East"
+     },
+     {
+       "Street":"Zanker Rd",
+       "Direction":"North"
+     },
+     {
+       "Street":"CA-237 E",
+       "Direction":"East"
+     },
+     {
+       "Street":"I-880 S",
+       "Direction":"South"
+     },
+     {
+       "Street":"US-101 N",
+       "Direction":"North"
+     },
+     {
+       "Street":"N 10th St",
+       "Direction":"South"
+     }
+   ]
+},
+  {
+  "Id":4,
+	"Source":"San Jose State University",
+	"Destination": "Casa Verde Street",
+    "Travel Time": "18 mins",
+    "Steps":[
+     {
+       "Street":"S 10th St",
+       "Direction":"South"
+     },
+     {
+       "Street":"I-280 N",
+       "Direction":"North"
+     },
+     {
+       "Street":"CA-87 N",
+       "Direction":"North"
+     },
+     {
+       "Street":"N 1st St",
+       "Direction":"North"
+     },
+     {
+       "Street":"Charcot Av",
+       "Direction":"East"
+     },
+     {
+       "Street":"Zanker Rd",
+       "Direction":"North"
+     },
+     {
+       "Street":"E Tasman Dr",
+       "Direction":"West"
+     },
+      {
+       "Street":"Casa Verde St",
+       "Direction":"North"
+     }
+   ]
+},
+  {
+  "Id":5,
+	"Source":"Mineta San Jose International Airport",
+	"Destination": "Casa Verde Street",
+    "Travel Time": "14 mins",
+    "Steps":[
+      {
+      "Street": "Airport Blvd",
+      "Direction": "North"
+      },
+       {
+      "Street":"E Brokaw Rd",
+      "Direction":"East"
+      },
+       {
+      "Street":"Zanker Rd",
+      "Direction":"North"
+      },
+      {
+      "Street":"E Tasman Dr",
+      "Direction":"West"
+      },
+      {
+      "Street":" Casa Verde St",
+      "Direction":"North"
+      }
+    ]
+},
+  {
+	"Id": 11,
+	"Source": "Avaya Stadium",
+	"Destination": "San Jose State University",
+	"Travel Time": "12 mins",
+	"Steps": [{
+		"Street":"Coleman Av",
+		"Direction":"South"
+	},
+	{
+		"Street":"N Market St",
+		"Direction":"South"
+	},
+	{
+		"Street":"W St James St",
+		"Direction":"East"
+	},
+	{
+		"Street":"N 7th St",
+		"Direction":"South"
+	},
+	{
+		"Street":"E San Fernando St",
+		"Direction":"East"
+	}
+    ]
+},
+  {
+	"Id": 12,
+	"Source":"DMV San Jose",
+	"Destination": "San Jose State University",
+	"Travel Time": "9 mins",
+	"Steps": [{
+		"Street":"Senter Rd",
+		"Direction":"North"
+	},
+	{
+		"Street":"Keyes St",
+		"Direction":"West"
+	},
+	{
+		"Street":"S 11th St",
+		"Direction":"North"
+	},
+	{
+		"Street":"E San Antonio St",
+		"Direction":"West"
+	},
+	{
+		"Street":"S 10th St",
+		"Direction":"South"
+	}]
+},
+  {
+	"Id": 13,
+	"Source":"San Jose State University",
+	"Destination": "DMV San Jose",
+	"Travel Time": "9 mins",
+	"Steps": [{
+		"Street":"S 10th St",
+		"Direction":"South"
+	},
+	{
+		"Street":"Parrott St",
+		"Direction":"East"
+	},
+	{
+		"Street":"Senter Rd",
+		"Direction":"North"
+	}]
+},
+  {
+	"Id": 14,
+	"Source":"MapR Technologies, 350 Holger Way",
+	"Destination": "San Jose State University",
+	"Travel Time": "15 mins",
+	"Steps": [{
+		"Street":"Holger Way",
+		"Direction":"East"
+	},
+	{
+		"Street":"Zanker Rd",
+		"Direction":"North"
+	},
+	{
+		"Street":"I-880 S",
+		"Direction":"South"
+	},
+	{
+		"Street":"US-101 N",
+		"Direction":"South"
+	},
+	{
+		"Street":"N 10th St",
+		"Direction":"South"
+	}
+    ]
+},
+  {
+	"Id": 15,
+	"Source":"San Jose State University",
+	"Destination": "MapR Technologies, 350 Holger Way",
+	"Travel Time": "16 mins",
+	"Steps": [
+      {
+		"Street":"S 10th St",
+		"Direction":"South"
+	},
+	{
+		"Street":"I-280 S",
+		"Direction":"South"
+	},
+	{
+		"Street":"I-680 N",
+		"Direction":"North"
+	},
+	{
+		"Street":"I-880 N",
+		"Direction":"North"
+	},
+	{
+		"Street":"Calaveras Blvd",
+		"Direction":"West"
+	},
+	{
+		"Street":"CA-237 W",
+		"Direction":"West"
+	},
+	{
+		"Street":"Zanker Rd",
+		"Direction":"South"
+	},
+	{
+		"Street":"Holger Way",
+		"Direction":"West"
+	}
+    ]
+},
+  {
+	"Id": 16,
+	"Source":"Winchester Mystery House",
+	"Destination": "San Jose State University",
+	"Travel Time": "13 mins",
+	"Steps": [
+      {
+		"Street":"Olsen Dr",
+		"Direction":"East"
+      },
+	{
+		"Street":"S Winchester Blvd",
+		"Direction":"South"
+	},
+	{
+		"Street":"Tisch Way",
+		"Direction":"East"
+	},
+	{
+		"Street":"S Monroe St",
+		"Direction":"North"
+	},
+	{
+		"Street":"Stevens Creek Blvd",
+		"Direction":"East"
+	},
+	{
+		"Street":"I-280 S",
+		"Direction":"South"
+	},
+	{
+		"Street":"S 7th St",
+		"Direction":"North"
+	},
+	{
+		"Street":"E San Salvador St",
+		"Direction":"East"
+	}]
+},
+  {
+	"Id": 17,
+	"Source":"San Jose State University",
+	"Destination": "Winchester Mystery House",
+	"Travel Time": "12 mins",
+	"Steps": [{
+		"Street":"S 10th St",
+		"Direction":"South"
+	},
+	{
+		"Street":"I-280 N",
+		"Direction":"North"
+	},
+	{
+		"Street":"W San Carlos St",
+		"Direction":"West"
+	},
+	{
+		"Street":"Stevens Creek Blvd",
+		"Direction":"West"
+	},
+	{
+		"Street":"S Winchester Blvd",
+		"Direction":"South"
+	},
+	{
+		"Street":"Olsen Dr",
+		"Direction":"East"
+	}]
+},
+  {
+	"Id": 18,
+	"Source":"N 1st Street ",
+	"Destination": "Santana Row",
+	"Travel Time": "15 mins",
+	"Steps": [
+      {
+		"Street":"N 1st St",
+		"Direction":"South"
+      },
+	{
+		"Street":"Matrix Blvd",
+		"Direction":"East"
+	},
+	{
+		"Street":"US-101 S",
+		"Direction":"South"
+	},
+	{
+		"Street":"I-880 S",
+		"Direction":"South"
+	},
+	{
+		"Street":"Stevens Creek Blvd",
+		"Direction":"East"
+	}]
+},
+  {
+	"Id": 19,
+	"Source":"Santana Row",
+	"Destination": "N 1st Street",
+	"Travel Time": "15 mins",
+	"Steps": [{
+		"Street":"Santana Row",
+		"Direction":"South"
+	},
+	{
+		"Street":"Olsen Dr",
+		"Direction":"East"
+	},
+	{
+		"Street":"Stevens Creek Blvd",
+		"Direction":"East"
+	},
+	{
+		"Street":"I-880 N",
+		"Direction":"North"
+	},
+	{
+		"Street":"US-101 N",
+		"Direction":"North"
+	},
+	{
+		"Street":"W Trimble Rd",
+		"Direction":"East"
+	},
+	{
+		"Street":"N 1st St",
+		"Direction":"South"
+	}]
+},
+  {
+	"Id": 20,
+	"Source":"San Jose State University",
+	"Destination": "Santana Row",
+	"Travel Time": "12 mins",
+	"Steps": [
+      {
+		"Street":"S 10th St",
+		"Direction":"South"
+	},
+	{
+		"Street":"I-280 N",
+		"Direction":"North"
+	},
+	{
+		"Street":"W San Carlos St",
+		"Direction":"West"
+	},
+	{
+		"Street":"Stevens Creek Blvd",
+		"Direction":"West"
+	},
+	{
+		"Street":"Santana Row",
+		"Direction":"East"
+	}
+    ]
+},
+  {
+    "Id": 21,
+    "Source": "Santana Row",
+    "Destination": "San Jose State University",
+    "Travel Time": "12 mins",
+    "Steps": [
+      {
+        "Street": "Santana Row",
+        "Direction": "South"
+      },
+      {
+        "Street": "Olsen Dr",
+        "Direction": "East"
+      },
+      {
+        "Street": "Hatton St",
+        "Direction": "North"
+      },
+      {
+        "Street": "S Baywood Av",
+        "Direction": "East"
+      },
+      {
+        "Street": "Stevens Creek Blvd",
+        "Direction": "East"
+      },
+      {
+        "Street": "I-280 S",
+        "Direction": "South"
+      },
+      {
+        "Street": "Virginia St",
+        "Direction": "East"
+      },
+      {
+        "Street": "N 7th St",
+        "Direction": "North"
+      },
+      {
+        "Street": "E San Salvador St",
+        "Direction": "East"
+      }
+    ]
+  },
+  {
+    "Id": 22,
+    "Source": "San Jose State University",
+    "Destination": "Alum Rock Park",
+    "Travel Time": "23 mins",
+    "Steps": [
+      {
+        "Street": "S 10th St",
+        "Direction": "South"
+      },
+      {
+        "Street": "I-280 S",
+        "Direction": "South"
+      },
+      {
+        "Street": "I-680 N",
+        "Direction": "North"
+      },
+      {
+        "Street": "Berryessa Rd",
+        "Direction": "East"
+      },
+      {
+        "Street": "Capitol Av N",
+        "Direction": "South"
+      },
+      {
+        "Street": "Penitencia Creek",
+        "Direction": "East"
+      },
+      {
+        "Street": "Alum Rock Falls Rd",
+        "Direction": "East"
+      }
+  ]
+},
+  {
+    "Id": 23,
+    "Source": "Casa Verde Street",
+    "Destination": "Costco Wholesale, 1709 Automation Pkwy, San Jose, CA 95131",
+    "Travel Time": "13 mins",
+    "Steps": [
+      {
+        "Street": "Casa Verde St",
+        "Direction": "East"
+      },
+      {
+        "Street": "Baypointe Pkwy",
+        "Direction": "East"
+      },
+      {
+        "Street": "Zanker Rd",
+        "Direction": "North"
+      },
+      {
+        "Street": "CA-237 E",
+        "Direction": "East"
+      },
+      {
+        "Street": "I-880 S",
+        "Direction": "South"
+      },
+      {
+        "Street": "Montague Expressway",
+        "Direction": "East"
+      },
+      {
+        "Street": "Trade Zone Blvd",
+        "Direction": "East"
+      },
+      {
+        "Street": "Lundy Ave",
+        "Direction": "South"
+      },
+      {
+        "Street": "McKay Dr",
+        "Direction": "East"
+      }
+    ]
+  },
+  {
+    "Id": 24,
+    "Source": "Costco Wholesale, 1709 Automation Pkwy, San Jose, CA 95131",
+    "Destination": "Casa Verde Street",
+    "Travel Time": "13 mins",
+    "Steps": [
+      {
+        "Street": "Automation Pkwy",
+        "Direction": "North"
+      },
+      {
+        "Street": "McKay Dr",
+        "Direction": "West"
+      },
+      {
+        "Street": "Lundy Ave",
+        "Direction": "North"
+      },
+      {
+        "Street": "Trade Zone Blvd",
+        "Direction": "East"
+      },
+      {
+        "Street": "Montague Expressway",
+        "Direction": "South"
+      },
+      {
+        "Street": "McCarthy Blvd",
+        "Direction": "North"
+      },
+      {
+        "Street": "E Tasman Dr",
+        "Direction": "West"
+      },
+      {
+        "Street": "Casa Verde St",
+        "Direction": "North"
+      }
+    ]
+  },
+  {
+    "Id": 25,
+    "Source": "N 1st Street",
+    "Destination": "Downtown San Jose",
+    "Travel Time": "13 mins",
+    "Steps": [
+      {
+        "Street": "N 1st St",
+        "Direction": "South"
+      },
+      {
+        "Street": "Charcot Av",
+        "Direction": "West"
+      },
+      {
+        "Street": "CA-87 S",
+        "Direction": "South"
+      },
+      {
+        "Street": "Almaden Blvd",
+        "Direction": "South"
+      },
+      {
+        "Street": "W Santa Clara St",
+        "Direction": "East"
+      }
+    ]
+  },
+  {
+    "Id": 26,
+    "Source": "Downtown San Jose",
+    "Destination": "N 1st Street",
+    "Travel Time": "9 mins",
+    "Steps": [
+      {
+        "Street": "W Santa Clara St",
+        "Direction": "West"
+      },
+      {
+        "Street": "Notre Dame Av",
+        "Direction": "North"
+      },
+      {
+        "Street": "CA-87 N",
+        "Direction": "North"
+      },
+      {
+        "Street": "Orchard Pkwy",
+        "Direction": "North"
+      },
+      {
+        "Street": "W Trimble Rd",
+        "Direction": "East"
+      },
+      {
+        "Street": "N 1st St",
+        "Direction": "South"
+      }
+    ]
+  },
+  {
+    "Id": 27,
+    "Source": "San Jose State University",
+    "Destination": "1302,The Alameda",
+    "Travel Time": "9 mins",
+    "Steps": [
+      {
+        "Street": "10th St",
+        "Direction": "South"
+      },
+      {
+        "Street": "I-280 N",
+        "Direction": "North"
+      },
+      {
+        "Street": "CA-87 N",
+        "Direction": "North"
+      },
+      {
+        "Street": "W Julian St",
+        "Direction": "West"
+      }
+    ]
+  },
+  {
+    "Id": 28,
+    "Source": "1302,The Alameda",
+    "Destination": "San Jose State University",
+    "Steps": [
+      {
+        "Street": "W Julian St",
+        "Direction": "East"
+      },
+      {
+        "Street": "W St James St",
+        "Direction": "East"
+      },
+      {
+        "Street": "N 7th St",
+        "Direction": "South"
+      },
+      {
+        "Street": "E San Fernando St",
+        "Direction": "East"
+      }
+    ]
+  },
+  {
+    "Id": 29,
+    "Source":"Mineta San Jose International Airport",
+    "Destination": "1302,The Alameda",
+    "Travel Time": "9 mins",
+     "Steps": [
+      {
+        "Street": "Airport Blvd",
+        "Direction": "East"
+      },
+      {
+        "Street": "Skyport Dr",
+        "Direction": "West"
+      },
+      {
+        "Street": "CA-87 S",
+        "Direction": "South"
+      },
+      {
+        "Street": "W Julian St",
+        "Direction": "West"
+      }
+    ]
+  },
+  {
+    "Id": 30,
+    "Source": "1302,The Alameda",
+    "Destination": "Mineta San Jose International Airport",
+    "Travel Time": "8 mins",
+    "Steps": [
+        {
+          "Street": "W Julian St",
+          "Direction": "East"
+        },
+        {
+          "Street": "CA-87 N",
+          "Direction": "North"
+        },
+        {
+          "Street": "Skyport Dr",
+          "Direction": "West"
+        }
+      ]
+  }
+]
