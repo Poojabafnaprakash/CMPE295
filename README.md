@@ -1,28 +1,36 @@
-# WebApplication
+## WebApplication
+To run the front-end part of the application:
+        1) cd CMPE295/ <br />
+        2) cd npm install <br />
+        3) Create an account at https://developers.google.com/maps/ <br />
+        4) Enable Google Maps Directions API key at https://developers.google.com/maps/documentation/directions/ <br />
+        5) Copy the generated key and paste it in directionAPI.js file in CMPE295/CMPE295-WebAppBackend/routes/ folder on line 2. <br />
+        6) Do npm start from terminal <br />
+        7) On browser Navigate to http://localhost:4200/ to view the application.
+        
+To run the back-end part of the application:
+        1) cd CMPE295/CMPE295-WebAppBackend/ <br />
+        2) npm install <br />
+        3) nodemon start <br />
+        4) The server is running on port 3000 and is available at http://localhost:3000. <br />
+        
+Configuring MySQL database schema:
+        1) Install MySQL and Sequel Pro or MySQL Workbench <br />
+        2) cd Database/ <br />
+        3) Create a database in MySQL named CMPE295 <br />
+        4) Copy and run all the scripts on Sequel Pro or MySQL Workbench query terminal for the database CMPE295. <br />
+        5) Update the username and password for MySQL in CMPE295/CMPE295-WebAppBackend/routes/mysql.js file on line 7 and 8. <br />    
+        
+## Prediction server
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.1.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
 ## Running unit tests
+        1) cd CMPE295/ <br />
+        2) npm test <br />
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Running Cron Job:
+        1) Create an account at https://developers.google.com/maps/ <br />
+        2) Enable Google Maps Directions API key at https://developers.google.com/maps/documentation/directions/ <br />
+        3) Copy the generated key and paste it in cronJob.js file in CMPE295/CMPE295-WebAppBackend/routes/ folder on line 2. <br />
+        4) Uncomment line 59 in cronJob.js
+        5) Run the server as described under WebApplication(back-end part)

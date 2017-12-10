@@ -1,7 +1,7 @@
 var ejs = require('ejs');
 var mysql = require('mysql');
 
-var pool = mysql.createPool({
+var connectionPool = mysql.createPool({
     connectionLimit: 10,
     host: 'localhost',
     user: 'root',
@@ -11,7 +11,7 @@ var pool = mysql.createPool({
 });
 
 exports.fetchData = function (callback, sqlQuery) {
-    pool.getConnection(function (err, connection) {
+  connectionPool.getConnection(function (err, connection) {
         if (err) {
             console.log("ERROR: " + err.message);
         } else {
@@ -28,7 +28,7 @@ exports.fetchData = function (callback, sqlQuery) {
     console.log("\nConnection closed from fetchData");
 };
 exports.insertData = function (callback, sqlQuery) {
-    pool.getConnection(function (err, connection) {
+  connectionPool.getConnection(function (err, connection) {
         if (err) {
             console.log("ERROR: " + err.message);
         } else {
@@ -47,7 +47,7 @@ exports.insertData = function (callback, sqlQuery) {
 
 };
 exports.updateData = function (callback, sqlQuery) {
-    pool.getConnection(function (err, connection) {
+  connectionPool.getConnection(function (err, connection) {
         if (err) {
             console.log("ERROR: " + err.message);
         } else {
