@@ -32,5 +32,5 @@ Configuring MySQL database schema: <br />
 &emsp; &emsp;  &emsp;     1) Create an account at https://developers.google.com/maps/ <br />
 &emsp; &emsp;  &emsp;     2) Enable Google Maps Directions API key at https://developers.google.com/maps/documentation/directions/ <br />
 &emsp; &emsp;  &emsp;     3) Copy the generated key and paste it in cronJob.js file in CMPE295/CMPE295-WebAppBackend/routes/ folder on line 2. <br />
-&emsp; &emsp;  &emsp;     4) Uncomment line 59 in cronJob.js
-&emsp; &emsp;  &emsp;     5) Run the server as described under WebApplication(back-end part)
+&emsp; &emsp;  &emsp;     4) Uncomment line 59 in cronJob.js <br />
+&emsp; &emsp;  &emsp;     5) Run the server as described under WebApplication(back-end part) <br />
