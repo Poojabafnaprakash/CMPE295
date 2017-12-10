@@ -1,7 +1,7 @@
 ## WebApplication
 To run the front-end part of the application: <br />
-&nbsp      1) cd CMPE295/ <br />
-&emsp       2) cd npm install <br />
+&nbsp; &nbsp; &nbsp; &nbsp;       1) cd CMPE295/ <br />
+&emsp;       2) cd npm install <br />
 &emsp        3) Create an account at https://developers.google.com/maps/ <br />
 &emsp        4) Enable Google Maps Directions API key at https://developers.google.com/maps/documentation/directions/ <br />
 &emsp        5) Copy the generated key and paste it in directionAPI.js file in CMPE295/CMPE295-WebAppBackend/routes/ folder on line 2. <br />
