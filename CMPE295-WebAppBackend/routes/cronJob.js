@@ -1,5 +1,5 @@
 var googleMapsClient = require('@google/maps').createClient({
-    key: 'AIzaSyC8rg2gqE55sZqXFwsyYgz-OpmEBqHRXvs',
+    key: 'ADD KEY',
     Promise: Promise
 });
 
