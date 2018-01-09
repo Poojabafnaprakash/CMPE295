@@ -1,16 +1,9 @@
 var googleMapsClient = require('@google/maps').createClient({
-    key: 'AIzaSyC8rg2gqE55sZqXFwsyYgz-OpmEBqHRXvs',
+    key: 'ADD KEY',
     Promise: Promise
 });
+
 var mysql = require('./mysql');
-
-
-//Previous key: AIzaSyDwoug5gmlX3edUXItz1b8MJMcveKFEu1A
-//key : 'AIzaSyB6QhWNhYtzfJeipEvQO-gaoic6egCxNmQ',
-//key: AIzaSyCEkzGdbrRZw9NyFeiccZdoac2FBOyKW1g
-//key: AIzaSyC8rg2gqE55sZqXFwsyYgz-OpmEBqHRXvs
-
-
 var fs = require('fs');
 var Client = require('node-rest-client').Client;
 var client = new Client();
