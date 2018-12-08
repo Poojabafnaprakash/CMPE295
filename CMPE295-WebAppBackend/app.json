@@ -2,7 +2,7 @@
   "name": "Start on Heroku: Node.js",
   "description": "CMPE 295 web application",
   "repository": "https://github.com/Poojabafnaprakash/CMPE295/tree/WebApplication",
-  "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
+  "logo": "https://cdn.jsdelivr.net/gh/heroku/node-js-getting-started/public/node.svg",
   "keywords": [
     "node",
     "express",
